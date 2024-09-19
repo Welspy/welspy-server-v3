@@ -31,6 +31,7 @@ public class AuthController {
     @Operation(summary = "회원가입")
     @ResponseStatus(HttpStatus.CREATED)
     public BaseResponse signUp(@Validated @RequestBody SignUpRequest signUpRequest){
+        authService.signUp(signUpRequest);
         return BaseResponse.created("회원가입 성공");
     }
 
