@@ -18,8 +18,8 @@ public class SwaggerConfig {
 
     private Info apiInfo() {
         return new Info()
-                .title("Welspy V2")
-                .description("Welspy V2 API")
+                .title("Welspy V3")
+                .description("Welspy V3 API")
                 .version("0.0.1");
     }
 
