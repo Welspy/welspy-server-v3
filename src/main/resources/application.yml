@@ -1,0 +1,48 @@
+spring:
+  datasource:
+    url: ${secrets.DB_URL}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: ${secrets.DB_USERNAME}
+    password: ${secrets.PASSWORD}
+
+  mail:
+    host: smtp.gmail.com
+    username: luisgunkim@gmail.com
+    password: ${secrets.MAIL_PASSWORD}
+    properties:
+      mail.smtp.auth: true
+      mail.smtp.starttls.enable: true
+
+  redis:
+    host: ${secrets.REDIS_HOST}
+    port: ${secrets.REDIS_PORT}
+
+  jpa:
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+        format_sql: true
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+application:
+  jwt:
+    secretKey: ${secrets.JWT_SECRET_KEY}
+    expiration: 43200000    # 12시간
+    refreshExpiration: 604800000   # 7일
+
+springdoc:
+  api-docs:
+    enabled: true
+    version: openapi_3_0
+    path: /v3/api-docs
+
+  default-consumes-media-type: application/json
+  auto-tag-classes: true
+
+  swagger-ui:
+    operationsSorter: method
+    path: /swagger-ui.html
