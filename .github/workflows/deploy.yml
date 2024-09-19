@@ -1,0 +1,57 @@
+name: CI/CD using github actions & docker
+
+on:
+  push:
+    branches: [ "main" ] # 해당 branch에 푸쉬 발생 시 업데이트
+
+jobs:
+  CI-CD:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up JDK 22
+      uses: actions/setup-java@v2
+      with:
+        java-version: '22'
+        distribution: 'temurin'
+        
+    - name: set yml file
+      uses: microsoft/variable-substitution@v1
+      with:
+        files: src/main/resources/application.yml
+      env:
+        spring.datasource.url: ${{ secrets.DB_URL }}
+        spring.datasource.username: ${{ secrets.DB_USERNAME }}
+        spring.datasource.password: ${{ secrets.DB_PASSWORD }}
+        application.jwt.secretKey: ${{ secrets.JWT_SECRET_KEY }}
+        spring.mail.password: ${{ secrets.MAIL_PASSWORD }}
+        spring.redis.host: ${{ secrets.REDIS_HOST }}
+        spring.redis.port: ${{ secrets.REDIS_PORT }}
+
+    - name: set chmod
+      run: chmod +x ./gradlew
+        
+    - name: Build with Gradle
+      run: ./gradlew bootJar
+
+    - name: Docker build & push to prod
+      run: |
+        docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+        docker build -f Dockerfile -t ${{ secrets.DOCKER_USERNAME }}/welspy-server-v3:0.0.1 .
+        docker push ${{ secrets.DOCKER_USERNAME }}/welspy-server-v3:0.0.1
+
+    - name: Deploy to prod
+      uses: appleboy/ssh-action@master
+      id: deploy-prod
+      with:
+        host: ${{ secrets.HOST_PROD }} # EC2 퍼블릭 IPv4 DNS
+        username: ubuntu
+        key: ${{ secrets.PRIVATE_KEY }} # EC2 private key
+        port: ${{ secrets.PORT }} #ssh port (22)
+        envs: GITHUB_SHA
+        script: |
+          docker stop welspy-server-v3
+          docker rm welspy-server-v3
+          docker rmi ${{ secrets.DOCKER_USERNAME }}/welspy-server-v3:0.0.1
+          docker pull ${{ secrets.DOCKER_USERNAME }}/welspy-server-v3:0.0.1
+          docker run -d -p 8080:8080 --name welspy-server-v3 ${{ secrets.DOCKER_USERNAME }}/welspy-server-v3:0.0.1
