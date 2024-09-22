@@ -1,10 +1,15 @@
 package com.project.welspyserverv3.domain.room.service;
 
+import com.project.welspyserverv3.domain.room.client.dto.MemberList;
 import com.project.welspyserverv3.domain.room.client.dto.Room;
 import com.project.welspyserverv3.domain.room.client.dto.request.RoomCreateRequest;
+import com.project.welspyserverv3.domain.room.client.dto.request.RoomJoinRequest;
+import com.project.welspyserverv3.domain.room.domain.entity.MemberListEntity;
 import com.project.welspyserverv3.domain.room.domain.entity.RoomEntity;
+import com.project.welspyserverv3.domain.room.domain.repository.jpa.MemberListJpaRepository;
 import com.project.welspyserverv3.domain.room.domain.repository.jpa.RoomJpaRepository;
 import com.project.welspyserverv3.domain.room.exception.RoomNotFoundException;
+import com.project.welspyserverv3.global.common.repository.UserSecurity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -13,10 +18,12 @@ import org.springframework.stereotype.Service;
 public class RoomService {
 
     private final RoomJpaRepository roomJpaRepository;
+    private final MemberListJpaRepository memberListJpaRepository;
+    private final UserSecurity userSecurity;
     private final Room roomDto;
 
     public void createRoom(RoomCreateRequest request) {
-        save(Room.builder()
+        saveRoom(Room.builder()
                 .title(request.getTitle())
                 .description(request.getDescription())
                 .goalMoney(request.getGoalMoney())
@@ -26,7 +33,16 @@ public class RoomService {
                 .build());
     }
 
-    public void save(Room room){
+    public void joinRoom(RoomJoinRequest request) {
+        Room room = getRoomById(request.getRoomId());
+        saveMemberList(MemberList.builder()
+                .roomId(room.getRoomId())
+                .email(userSecurity.getUser().getEmail())
+                .build());
+
+    }
+
+    public void saveRoom(Room room){
         roomJpaRepository.save(RoomEntity.builder()
                 .roomId(room.getRoomId())
                 .title(room.getTitle())
@@ -37,6 +53,14 @@ public class RoomService {
                 .roomType(room.getRoomType())
                 .build()
         );
+    }
+
+    public void saveMemberList(MemberList memberList){
+        memberListJpaRepository.save(MemberListEntity.builder()
+                .idx(memberList.getIdx())
+                .roomId(memberList.getRoomId())
+                .email(memberList.getEmail())
+                .build());
     }
 
     public Room getRoomById(Long roomId){
