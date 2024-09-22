@@ -8,6 +8,7 @@ import com.project.welspyserverv3.domain.room.domain.entity.MemberListEntity;
 import com.project.welspyserverv3.domain.room.domain.entity.RoomEntity;
 import com.project.welspyserverv3.domain.room.domain.repository.jpa.MemberListJpaRepository;
 import com.project.welspyserverv3.domain.room.domain.repository.jpa.RoomJpaRepository;
+import com.project.welspyserverv3.domain.room.exception.MemberLimitOverException;
 import com.project.welspyserverv3.domain.room.exception.RoomNotFoundException;
 import com.project.welspyserverv3.global.common.repository.UserSecurity;
 import lombok.RequiredArgsConstructor;
@@ -35,6 +36,9 @@ public class RoomService {
 
     public void joinRoom(RoomJoinRequest request) {
         Room room = getRoomById(request.getRoomId());
+        if(room.getMemberLimit() + 1 > room.getMemberLimit()){
+            throw MemberLimitOverException.EXCEPTION;
+        }
         saveMemberList(MemberList.builder()
                 .roomId(room.getRoomId())
                 .email(userSecurity.getUser().getEmail())

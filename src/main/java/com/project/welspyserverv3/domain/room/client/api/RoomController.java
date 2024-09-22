@@ -2,6 +2,7 @@ package com.project.welspyserverv3.domain.room.client.api;
 
 import com.project.welspyserverv3.domain.room.client.dto.Room;
 import com.project.welspyserverv3.domain.room.client.dto.request.RoomCreateRequest;
+import com.project.welspyserverv3.domain.room.client.dto.request.RoomJoinRequest;
 import com.project.welspyserverv3.domain.room.service.RoomService;
 import com.project.welspyserverv3.global.common.dto.response.BaseResponse;
 import io.swagger.v3.oas.annotations.Operation;
@@ -27,6 +28,14 @@ public class RoomController {
     public BaseResponse createRoom(RoomCreateRequest request) {
         roomService.createRoom(request);
         return BaseResponse.created("방 생성 성공");
+    }
+
+    @PostMapping("/join")
+    @ResponseStatus(HttpStatus.CREATED)
+    @Operation(summary = "챌린지 가입")
+    public BaseResponse joinRoom(RoomJoinRequest request) {
+        roomService.joinRoom(request);
+        return BaseResponse.created("방 가입 성공");
     }
 
 }
