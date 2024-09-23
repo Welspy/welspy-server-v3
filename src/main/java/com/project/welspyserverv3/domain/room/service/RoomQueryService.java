@@ -1,6 +1,7 @@
 package com.project.welspyserverv3.domain.room.service;
 
 import com.project.welspyserverv3.domain.room.client.dto.Room;
+import com.project.welspyserverv3.domain.room.client.dto.request.RoomSearchRequest;
 import com.project.welspyserverv3.domain.room.domain.repository.query.RoomQueryRepository;
 import com.project.welspyserverv3.global.common.dto.request.PageRequest;
 import lombok.RequiredArgsConstructor;
@@ -16,6 +17,10 @@ public class RoomQueryService {
 
     public List<Room> roomList(PageRequest request){
         return roomQueryRepository.roomList(request);
+    }
+
+    public List<Room> roomSearch(RoomSearchRequest request){
+        return roomQueryRepository.roomSearch(request);
     }
 
 }

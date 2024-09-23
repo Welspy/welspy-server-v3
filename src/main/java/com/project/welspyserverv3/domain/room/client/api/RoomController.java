@@ -3,6 +3,7 @@ package com.project.welspyserverv3.domain.room.client.api;
 import com.project.welspyserverv3.domain.room.client.dto.Room;
 import com.project.welspyserverv3.domain.room.client.dto.request.RoomCreateRequest;
 import com.project.welspyserverv3.domain.room.client.dto.request.RoomJoinRequest;
+import com.project.welspyserverv3.domain.room.client.dto.request.RoomSearchRequest;
 import com.project.welspyserverv3.domain.room.service.RoomQueryService;
 import com.project.welspyserverv3.domain.room.service.RoomService;
 import com.project.welspyserverv3.global.common.dto.request.PageRequest;
@@ -13,6 +14,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -48,10 +50,18 @@ public class RoomController {
 
     @GetMapping
     @Operation(summary = "챌린지 목록 출력")
-    public BaseResponseData<List<Room>> roomList(PageRequest request) {
+    public BaseResponseData<List<Room>> roomList(@ModelAttribute PageRequest request) {
         return BaseResponseData.ok(
                 "목록 출럭 성공",
                 roomQueryService.roomList(request));
+    }
+
+    @GetMapping("/search")
+    @Operation(summary = "챌린지 검색", description = "제목을 기준으로 해당 제목이 포함된 챌린지를 검색합니다.")
+    public BaseResponseData<List<Room>> roomSearch(@ModelAttribute RoomSearchRequest request) {
+        return BaseResponseData.ok(
+                "검색 성공",
+                roomQueryService.roomSearch(request));
     }
 
 }

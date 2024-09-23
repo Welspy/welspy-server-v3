@@ -1,6 +1,7 @@
 package com.project.welspyserverv3.domain.room.domain.repository.query;
 
 import com.project.welspyserverv3.domain.room.client.dto.Room;
+import com.project.welspyserverv3.domain.room.client.dto.request.RoomSearchRequest;
 import com.project.welspyserverv3.global.common.dto.request.PageRequest;
 import com.querydsl.core.types.ConstructorExpression;
 import com.querydsl.core.types.Projections;
@@ -22,6 +23,17 @@ public class RoomQueryRepository {
         return jpaQueryFactory
                 .select(roomConstructorExpression())
                 .from(roomEntity)
+                .offset((long) (request.getPage() - 1) * request.getSize())
+                .limit(request.getSize())
+                .orderBy(roomEntity.roomId.desc())
+                .fetch();
+    }
+
+    public List<Room> roomSearch(RoomSearchRequest request){
+        return jpaQueryFactory
+                .select(roomConstructorExpression())
+                .from(roomEntity)
+                .where(roomEntity.title.contains(request.getTitle()))
                 .offset((long) (request.getPage() - 1) * request.getSize())
                 .limit(request.getSize())
                 .orderBy(roomEntity.roomId.desc())
