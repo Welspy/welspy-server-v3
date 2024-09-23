@@ -29,15 +29,12 @@ public class RoomEntity {
     private String title;
 
     @Column(nullable = false)
-
     private String description;
 
     @Column(nullable = false)
-
     private Long goalMoney;
 
     @Column(nullable = false)
-
     private int memberLimit;
 
     @Column(nullable = false)
