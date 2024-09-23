@@ -27,6 +27,8 @@ jobs:
         spring.mail.password: ${{ secrets.MAIL_PASSWORD }}
         spring.redis.host: ${{ secrets.REDIS_HOST }}
         spring.redis.port: ${{ secrets.REDIS_PORT }}
+        cloud.aws.credentials.accessKey: ${{ secrets.S3_ACCESS_KEY }}
+        cloud.aws.credentials.secretKey: ${{ secrets.S3_SECRET_KEY }}
 
     - name: set chmod
       run: chmod +x ./gradlew

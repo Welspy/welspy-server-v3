@@ -37,10 +37,10 @@ application:
 cloud:
   aws:
     credentials:
-      accessKey: "<accessKey>"
-      secretKey: "<secretKey>"
+      accessKey: ${secrets.S3_ACCESS_KEY}
+      secretKey: ${secrets.SECRET_KEY}
     s3:
-      bucket: "<bucket>"
+      bucketName: welspy
     region:
       static: ap-northeast-2
     stack:
