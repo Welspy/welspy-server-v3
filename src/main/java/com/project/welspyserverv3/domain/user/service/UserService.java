@@ -22,8 +22,4 @@ public class UserService {
                 .orElseThrow(() -> UserNotFoundException.EXCEPTION);
     }
 
-    public void save(User user) {
-        userJpaRepository.save(userDTO.toUserEntity(user));
-    }
-
 }
