@@ -64,4 +64,20 @@ public class RoomController {
                 roomQueryService.roomSearch(request));
     }
 
+    @GetMapping("/private")
+    @Operation(summary = "비공개 챌리지 목록")
+    public BaseResponseData<List<Room>> privateRoomList(@ModelAttribute PageRequest request) {
+        return BaseResponseData.ok(
+                "목록 출력 성공",
+                roomQueryService.privateRoom(request));
+    }
+
+    @GetMapping("/public")
+    @Operation(summary = "공개 챌리지 목록")
+    public BaseResponseData<List<Room>> publicRoomList(@ModelAttribute PageRequest request) {
+        return BaseResponseData.ok(
+                "목록 출력 성공",
+                roomQueryService.publicRoom(request));
+    }
+
 }

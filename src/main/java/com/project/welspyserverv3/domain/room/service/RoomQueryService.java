@@ -23,4 +23,12 @@ public class RoomQueryService {
         return roomQueryRepository.roomSearch(request);
     }
 
+    public List<Room> privateRoom(PageRequest request){
+        return roomQueryRepository.privateRoom(request);
+    }
+
+    public List<Room> publicRoom(PageRequest request){
+        return roomQueryRepository.publicRoom(request);
+    }
+
 }

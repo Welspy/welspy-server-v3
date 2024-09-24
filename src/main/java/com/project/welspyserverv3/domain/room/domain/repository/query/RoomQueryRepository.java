@@ -2,6 +2,7 @@ package com.project.welspyserverv3.domain.room.domain.repository.query;
 
 import com.project.welspyserverv3.domain.room.client.dto.Room;
 import com.project.welspyserverv3.domain.room.client.dto.request.RoomSearchRequest;
+import com.project.welspyserverv3.domain.room.domain.enums.RoomType;
 import com.project.welspyserverv3.global.common.dto.request.PageRequest;
 import com.querydsl.core.types.ConstructorExpression;
 import com.querydsl.core.types.Projections;
@@ -34,6 +35,28 @@ public class RoomQueryRepository {
                 .select(roomConstructorExpression())
                 .from(roomEntity)
                 .where(roomEntity.title.contains(request.getTitle()))
+                .offset((long) (request.getPage() - 1) * request.getSize())
+                .limit(request.getSize())
+                .orderBy(roomEntity.roomId.desc())
+                .fetch();
+    }
+
+    public List<Room> privateRoom(PageRequest request){
+        return jpaQueryFactory
+                .select(roomConstructorExpression())
+                .from(roomEntity)
+                .where(roomEntity.roomType.eq(RoomType.PRIVATE))
+                .offset((long) (request.getPage() - 1) * request.getSize())
+                .limit(request.getSize())
+                .orderBy(roomEntity.roomId.desc())
+                .fetch();
+    }
+
+    public List<Room> publicRoom(PageRequest request){
+        return jpaQueryFactory
+                .select(roomConstructorExpression())
+                .from(roomEntity)
+                .where(roomEntity.roomType.eq(RoomType.PUBLIC))
                 .offset((long) (request.getPage() - 1) * request.getSize())
                 .limit(request.getSize())
                 .orderBy(roomEntity.roomId.desc())
