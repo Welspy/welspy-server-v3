@@ -22,4 +22,9 @@ public class UserService {
                 .orElseThrow(() -> UserNotFoundException.EXCEPTION);
     }
 
+    public void userDelete(){
+        User user = getUser();
+        userJpaRepository.deleteByEmail(user.getEmail());
+    }
+
 }
