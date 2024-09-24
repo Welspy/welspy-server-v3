@@ -1,9 +1,8 @@
 package com.project.welspyserverv3.domain.product.service;
 
-import com.project.welspyserverv3.domain.product.client.dto.Product;
 import com.project.welspyserverv3.domain.product.client.dto.request.CreateProductRequest;
 import com.project.welspyserverv3.domain.product.domain.entity.ProductEntity;
-import com.project.welspyserverv3.domain.product.domain.repository.ProductJpaRepository;
+import com.project.welspyserverv3.domain.product.domain.repository.jpa.ProductJpaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
