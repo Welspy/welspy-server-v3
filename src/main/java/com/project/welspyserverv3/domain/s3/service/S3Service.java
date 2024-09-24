@@ -1,4 +1,4 @@
-package com.project.welspyserverv3.global.s3.service;
+package com.project.welspyserverv3.domain.s3.service;
 
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.AmazonS3Exception;
@@ -19,8 +19,8 @@ import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
-import com.project.welspyserverv3.global.s3.entity.ImageEntity;
-import com.project.welspyserverv3.global.s3.repository.S3JpaRepository;
+import com.project.welspyserverv3.domain.s3.domain.entity.ImageEntity;
+import com.project.welspyserverv3.domain.s3.domain.repository.S3JpaRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;

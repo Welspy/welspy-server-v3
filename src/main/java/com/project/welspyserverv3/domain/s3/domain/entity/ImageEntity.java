@@ -1,4 +1,4 @@
-package com.project.welspyserverv3.global.s3.entity;
+package com.project.welspyserverv3.domain.s3.domain.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

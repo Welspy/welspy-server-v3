@@ -1,7 +1,7 @@
-package com.project.welspyserverv3.global.s3.api;
+package com.project.welspyserverv3.domain.s3.api;
 
+import com.project.welspyserverv3.domain.s3.service.S3Service;
 import com.project.welspyserverv3.global.common.dto.response.BaseResponseData;
-import com.project.welspyserverv3.global.s3.service.S3Service;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
