@@ -1,4 +1,4 @@
-package com.project.welspyserverv3.global.config;
+package com.project.welspyserverv3.global.config.email;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;

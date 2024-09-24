@@ -1,4 +1,4 @@
-package com.project.welspyserverv3.global.config;
+package com.project.welspyserverv3.global.config.swagger;
 
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;
