@@ -66,7 +66,7 @@ public class RoomController {
     }
 
     @GetMapping("/private")
-    @Operation(summary = "비공개 챌리지 목록")
+    @Operation(summary = "비공개 챌리지 목록", description = "(불편해? 자세를 고쳐앉아~)")
     public BaseResponseData<List<Room>> privateRoomList(@ModelAttribute PageRequest request) {
         return BaseResponseData.ok(
                 "목록 출력 성공",
@@ -82,7 +82,7 @@ public class RoomController {
     }
 
     @GetMapping("/my-room")
-    @Operation(summary = "공개 챌리지 목록", description = "현재 로그인한 유저가 들어간 챌린지 명단을 출력합니다.")
+    @Operation(summary = "내 챌리지 목록", description = "현재 로그인한 유저가 들어간 챌린지 명단을 출력합니다.")
     public BaseResponseData<List<MemberList>> myRoomList(@ModelAttribute PageRequest request) {
         return BaseResponseData.ok(
                 "목록 출력 성공",
