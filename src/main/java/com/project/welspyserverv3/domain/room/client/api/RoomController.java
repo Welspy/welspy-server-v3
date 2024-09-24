@@ -1,5 +1,6 @@
 package com.project.welspyserverv3.domain.room.client.api;
 
+import com.project.welspyserverv3.domain.room.client.dto.MemberList;
 import com.project.welspyserverv3.domain.room.client.dto.Room;
 import com.project.welspyserverv3.domain.room.client.dto.request.RoomCreateRequest;
 import com.project.welspyserverv3.domain.room.client.dto.request.RoomJoinRequest;
@@ -78,6 +79,14 @@ public class RoomController {
         return BaseResponseData.ok(
                 "목록 출력 성공",
                 roomQueryService.publicRoom(request));
+    }
+
+    @GetMapping("/my-room")
+    @Operation(summary = "공개 챌리지 목록", description = "현재 로그인한 유저가 들어간 챌린지 명단을 출력합니다.")
+    public BaseResponseData<List<MemberList>> myRoomList(@ModelAttribute PageRequest request) {
+        return BaseResponseData.ok(
+                "목록 출력 성공",
+                roomQueryService.myRoomList(request));
     }
 
 }
