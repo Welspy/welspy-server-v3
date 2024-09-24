@@ -1,6 +1,7 @@
 package com.project.welspyserverv3.domain.product.service;
 
 import com.project.welspyserverv3.domain.product.client.dto.Product;
+import com.project.welspyserverv3.domain.product.client.dto.request.ProductSearchRequest;
 import com.project.welspyserverv3.domain.product.domain.repository.query.ProductQueryRepository;
 import com.project.welspyserverv3.global.common.dto.request.PageRequest;
 import lombok.RequiredArgsConstructor;
@@ -16,6 +17,10 @@ public class ProductQueryService {
 
     public List<Product> productList(PageRequest request){
         return productQueryRepository.productList(request);
+    }
+
+    public List<Product> productSearch(ProductSearchRequest request){
+        return productQueryRepository.productSearch(request);
     }
 
 }

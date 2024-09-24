@@ -1,6 +1,7 @@
 package com.project.welspyserverv3.domain.product.domain.repository.query;
 
 import com.project.welspyserverv3.domain.product.client.dto.Product;
+import com.project.welspyserverv3.domain.product.client.dto.request.ProductSearchRequest;
 import com.project.welspyserverv3.global.common.dto.request.PageRequest;
 import com.querydsl.core.types.ConstructorExpression;
 import com.querydsl.core.types.Projections;
@@ -22,6 +23,17 @@ public class ProductQueryRepository {
         return jpaQueryFactory
                 .select(productConstructorExpression())
                 .from(productEntity)
+                .offset((long) (request.getPage() - 1) * request.getSize())
+                .limit(request.getSize())
+                .orderBy(productEntity.idx.desc())
+                .fetch();
+    }
+
+    public List<Product> productSearch(ProductSearchRequest request) {
+        return jpaQueryFactory
+                .select(productConstructorExpression())
+                .from(productEntity)
+                .where(productEntity.name.contains(request.getName()))
                 .offset((long) (request.getPage() - 1) * request.getSize())
                 .limit(request.getSize())
                 .orderBy(productEntity.idx.desc())

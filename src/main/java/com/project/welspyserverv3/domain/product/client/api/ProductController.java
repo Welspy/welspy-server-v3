@@ -2,6 +2,7 @@ package com.project.welspyserverv3.domain.product.client.api;
 
 import com.project.welspyserverv3.domain.product.client.dto.Product;
 import com.project.welspyserverv3.domain.product.client.dto.request.CreateProductRequest;
+import com.project.welspyserverv3.domain.product.client.dto.request.ProductSearchRequest;
 import com.project.welspyserverv3.domain.product.service.ProductQueryService;
 import com.project.welspyserverv3.domain.product.service.ProductService;
 import com.project.welspyserverv3.global.common.dto.request.PageRequest;
@@ -9,6 +10,7 @@ import com.project.welspyserverv3.global.common.dto.response.BaseResponse;
 import com.project.welspyserverv3.global.common.dto.response.BaseResponseData;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -44,6 +46,14 @@ public class ProductController {
         return BaseResponseData.ok(
                 "목록 출력 성공",
                 productQueryService.productList(request));
+    }
+
+    @GetMapping("/search")
+    @Operation(summary = "제품 검색")
+    public BaseResponseData<List<Product>> productListSearch(@ModelAttribute ProductSearchRequest request) {
+        return BaseResponseData.ok(
+                "목록 출력 성공",
+                productQueryService.productSearch(request));
     }
 
 }
