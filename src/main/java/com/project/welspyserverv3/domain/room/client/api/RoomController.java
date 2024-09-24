@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -50,6 +51,14 @@ public class RoomController {
     }
 
     @GetMapping
+    @Operation(summary = "챌린지 단일 조회", description = "roomId를 기준으로 챌린지를 단일 조회합니다.")
+    public BaseResponseData<Room> getRoom(@RequestParam Long roomId) {
+        return BaseResponseData.ok(
+                "조회 성공",
+                roomService.getRoomById(roomId));
+    }
+
+    @GetMapping("/list")
     @Operation(summary = "챌린지 목록 출력")
     public BaseResponseData<List<Room>> roomList(@ModelAttribute PageRequest request) {
         return BaseResponseData.ok(
@@ -74,7 +83,7 @@ public class RoomController {
     }
 
     @GetMapping("/public")
-    @Operation(summary = "공개 챌리지 목록")
+    @Operation(summary = "공개 챌린지 목록")
     public BaseResponseData<List<Room>> publicRoomList(@ModelAttribute PageRequest request) {
         return BaseResponseData.ok(
                 "목록 출력 성공",
@@ -82,7 +91,7 @@ public class RoomController {
     }
 
     @GetMapping("/my-room")
-    @Operation(summary = "내 챌리지 목록", description = "현재 로그인한 유저가 들어간 챌린지 명단을 출력합니다.")
+    @Operation(summary = "내 챌린지 목록", description = "현재 로그인한 유저가 들어간 챌린지 명단을 출력합니다.")
     public BaseResponseData<List<MemberList>> myRoomList(@ModelAttribute PageRequest request) {
         return BaseResponseData.ok(
                 "목록 출력 성공",
