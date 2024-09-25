@@ -19,12 +19,14 @@ public class MemberList {
     private Long idx;
     private Long roomId;
     private String email;
+    private Long balance;
 
     public MemberList toMemberList(MemberListEntity memberListEntity) {
         return MemberList.builder()
                 .idx(memberListEntity.getIdx())
                 .roomId(memberListEntity.getRoomId())
                 .email(memberListEntity.getEmail())
+                .balance(memberListEntity.getBalance())
                 .build();
     }
 

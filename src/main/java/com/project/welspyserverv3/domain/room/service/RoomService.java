@@ -42,8 +42,8 @@ public class RoomService {
         saveMemberList(MemberList.builder()
                 .roomId(room.getRoomId())
                 .email(userSecurity.getUser().getEmail())
+                .balance(0L)
                 .build());
-
     }
 
     public void saveRoom(Room room){

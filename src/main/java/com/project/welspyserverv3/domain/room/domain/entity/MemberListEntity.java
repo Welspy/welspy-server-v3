@@ -24,4 +24,6 @@ public class MemberListEntity {
     @Column(nullable = false)
     private String email;
 
+    private Long balance;
+
 }
