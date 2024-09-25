@@ -32,6 +32,19 @@ public class Room {
     private Long productId;
     private String productImageUrl;
 
+    public Room(Long roomId, String title, String description, Long goalMoney, int memberLimit, String imageUrl, Category category, RoomType roomType, Long productId, String productImageUrl) {
+        this.roomId = roomId;
+        this.title = title;
+        this.description = description;
+        this.goalMoney = goalMoney;
+        this.memberLimit = memberLimit;
+        this.imageUrl = imageUrl;
+        this.category = category;
+        this.roomType = roomType;
+        this.productId = productId;
+        this.productImageUrl = productImageUrl;
+    }
+
     public Room toRoom(RoomEntity roomEntity) {
         return Room.builder()
                 .roomId(roomEntity.getRoomId())
