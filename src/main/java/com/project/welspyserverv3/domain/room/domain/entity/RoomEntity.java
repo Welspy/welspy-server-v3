@@ -37,6 +37,8 @@ public class RoomEntity {
     @Column(nullable = false)
     private int memberLimit;
 
+    private String imageUrl;
+
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private Category category;

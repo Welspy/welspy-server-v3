@@ -25,6 +25,7 @@ public class Room {
     private String description;
     private Long goalMoney;
     private int memberLimit;
+    private String imageUrl;
     private Category category;
     private RoomType roomType;
 
@@ -35,6 +36,7 @@ public class Room {
                 .description(roomEntity.getDescription())
                 .goalMoney(roomEntity.getGoalMoney())
                 .memberLimit(roomEntity.getMemberLimit())
+                .imageUrl(roomEntity.getImageUrl())
                 .category(roomEntity.getCategory())
                 .roomType(roomEntity.getRoomType())
                 .build();

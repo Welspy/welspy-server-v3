@@ -13,6 +13,7 @@ public class RoomCreateRequest {
     private String description;
     private Long goalMoney;
     private int memberLimit;
+    private String imageUrl;
     private Category category;
     private RoomType roomType;
 

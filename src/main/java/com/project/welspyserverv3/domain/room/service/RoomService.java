@@ -29,6 +29,7 @@ public class RoomService {
                 .description(request.getDescription())
                 .goalMoney(request.getGoalMoney())
                 .memberLimit(request.getMemberLimit())
+                .imageUrl(request.getImageUrl())
                 .category(request.getCategory())
                 .roomType(request.getRoomType())
                 .build());
