@@ -1,9 +1,12 @@
 package com.project.welspyserverv3.domain.bank.client.api;
 
 import com.project.welspyserverv3.domain.bank.client.dto.Bank;
+import com.project.welspyserverv3.domain.bank.client.dto.BankLog;
 import com.project.welspyserverv3.domain.bank.client.dto.request.ChargeMoneyRequest;
 import com.project.welspyserverv3.domain.bank.client.dto.request.SaveMoneyRequest;
+import com.project.welspyserverv3.domain.bank.service.BankQueryService;
 import com.project.welspyserverv3.domain.bank.service.BankService;
+import com.project.welspyserverv3.global.common.dto.request.PageRequest;
 import com.project.welspyserverv3.global.common.dto.response.BaseResponseData;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -15,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/bank")
 @RequiredArgsConstructor
@@ -22,13 +27,30 @@ import org.springframework.web.bind.annotation.RestController;
 public class BankController {
 
     private final BankService bankService;
+    private final BankQueryService bankQueryService;
 
     @GetMapping
-    @Operation(summary = "내 뱅킹 조회")
+    @Operation(summary = "내 뱅킹 정보 조회")
     public BaseResponseData<Bank> myBank(){
         return BaseResponseData.ok(
                 "조회 성공",
                 bankService.getBankByEmail());
+    }
+
+    @GetMapping("/log-all")
+    @Operation(summary = "모든 로그 기록 보기")
+    public BaseResponseData<List<BankLog>> getAllLog(PageRequest request){
+        return BaseResponseData.ok(
+                "조회 성공",
+                bankQueryService.getAllLog(request));
+    }
+
+    @GetMapping("/log-my")
+    @Operation(summary = "내 로그 기록 보기")
+    public BaseResponseData<List<BankLog>> getMyLog(PageRequest request){
+        return BaseResponseData.ok(
+                "조회 성공",
+                bankQueryService.getMyLog(request));
     }
 
     @PatchMapping

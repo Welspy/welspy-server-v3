@@ -4,7 +4,7 @@ import com.project.welspyserverv3.domain.bank.client.dto.Bank;
 import com.project.welspyserverv3.domain.bank.client.dto.request.ChargeMoneyRequest;
 import com.project.welspyserverv3.domain.bank.client.dto.request.SaveMoneyRequest;
 import com.project.welspyserverv3.domain.bank.domain.entity.BankEntity;
-import com.project.welspyserverv3.domain.bank.domain.repository.BankJpaRepository;
+import com.project.welspyserverv3.domain.bank.domain.repository.jpa.BankJpaRepository;
 import com.project.welspyserverv3.domain.bank.exception.BankErrorException;
 import com.project.welspyserverv3.domain.bank.exception.BankNotFoundException;
 import com.project.welspyserverv3.domain.room.client.dto.MemberList;
