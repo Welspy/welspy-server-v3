@@ -1,5 +1,6 @@
 package com.project.welspyserverv3.domain.bank.client.api;
 
+import com.project.welspyserverv3.domain.bank.client.dto.Bank;
 import com.project.welspyserverv3.domain.bank.client.dto.request.ChargeMoneyRequest;
 import com.project.welspyserverv3.domain.bank.client.dto.request.SaveMoneyRequest;
 import com.project.welspyserverv3.domain.bank.service.BankService;
@@ -8,6 +9,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +22,14 @@ import org.springframework.web.bind.annotation.RestController;
 public class BankController {
 
     private final BankService bankService;
+
+    @GetMapping
+    @Operation(summary = "내 뱅킹 조회")
+    public BaseResponseData<Bank> myBank(){
+        return BaseResponseData.ok(
+                "조회 성공",
+                bankService.getBankByEmail());
+    }
 
     @PatchMapping
     @Operation(summary = "저금하기")
