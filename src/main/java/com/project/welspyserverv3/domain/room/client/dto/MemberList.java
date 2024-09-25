@@ -23,6 +23,7 @@ public class MemberList {
     private String title;
     private String description;
     private Long goalMoney;
+    private String productImageUrl;
 
     public MemberList toMemberList(MemberListEntity memberListEntity) {
         return MemberList.builder()
@@ -33,6 +34,7 @@ public class MemberList {
                 .title(memberListEntity.getTitle())
                 .description(memberListEntity.getDescription())
                 .goalMoney(memberListEntity.getGoalMoney())
+                .productImageUrl(memberListEntity.getProductImageUrl())
                 .build();
     }
 

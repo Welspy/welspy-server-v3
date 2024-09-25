@@ -51,6 +51,7 @@ public class RoomService {
                 .title(room.getTitle())
                 .description(room.getDescription())
                 .goalMoney(room.getGoalMoney())
+                .productImageUrl(room.getProductImageUrl())
                 .build());
     }
 
