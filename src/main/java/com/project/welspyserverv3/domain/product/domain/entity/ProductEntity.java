@@ -32,6 +32,12 @@ public class ProductEntity {
     private Long price;
 
     @Column(nullable = false)
+    private Long discount;
+
+    @Column(nullable = false)
+    private Long discountedPrice;
+
+    @Column(nullable = false)
     private String imageUrl;
 
 }

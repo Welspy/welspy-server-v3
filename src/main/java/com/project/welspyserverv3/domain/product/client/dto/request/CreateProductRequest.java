@@ -10,6 +10,7 @@ public class CreateProductRequest {
     private String name;
     private String description;
     private Long price;
+    private Long discount;
     private String imageUrl;
 
 }
