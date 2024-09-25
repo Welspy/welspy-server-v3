@@ -4,7 +4,10 @@ import com.project.welspyserverv3.domain.bank.client.dto.Bank;
 import com.project.welspyserverv3.domain.bank.client.dto.request.ChargeMoneyRequest;
 import com.project.welspyserverv3.domain.bank.client.dto.request.SaveMoneyRequest;
 import com.project.welspyserverv3.domain.bank.domain.entity.BankEntity;
+import com.project.welspyserverv3.domain.bank.domain.entity.BankLogEntity;
+import com.project.welspyserverv3.domain.bank.domain.enums.BankType;
 import com.project.welspyserverv3.domain.bank.domain.repository.jpa.BankJpaRepository;
+import com.project.welspyserverv3.domain.bank.domain.repository.jpa.BankLogJpaRepository;
 import com.project.welspyserverv3.domain.bank.exception.BankErrorException;
 import com.project.welspyserverv3.domain.bank.exception.BankNotFoundException;
 import com.project.welspyserverv3.domain.room.client.dto.MemberList;
@@ -23,6 +26,7 @@ public class BankService {
 
     private final BankJpaRepository bankJpaRepository;
     private final MemberListJpaRepository memberListJpaRepository;
+    private final BankLogJpaRepository bankLogJpaRepository;
     private final UserSecurity userSecurity;
     private final MemberList memberListDto;
     private final Bank bankDto;
@@ -45,6 +49,11 @@ public class BankService {
         }
         bank.setBalance(bank.getBalance() - request.getMoney());
         saveBank(bank);
+        bankLogJpaRepository.save(BankLogEntity.builder()
+                .accountNumber(bank.getAccountNumber())
+                .money(request.getMoney())
+                .bankType(BankType.SEND)
+                .build());
         MemberList memberList = memberListJpaRepository
                 .findByEmailAndRoomId(userSecurity.getUser().getEmail(), request.getMoney())
                 .map(memberListDto::toMemberList)
