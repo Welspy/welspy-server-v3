@@ -33,7 +33,7 @@ public class RoomService {
                 .imageUrl(request.getImageUrl())
                 .category(request.getCategory())
                 .roomType(request.getRoomType())
-                .productId(request.getProductId())
+                .productImageUrl(request.getProductImageUrl())
                 .build());
     }
 
@@ -48,6 +48,9 @@ public class RoomService {
                 .roomId(room.getRoomId())
                 .email(userSecurity.getUser().getEmail())
                 .balance(0L)
+                .title(room.getTitle())
+                .description(room.getDescription())
+                .goalMoney(room.getGoalMoney())
                 .build());
     }
 

@@ -20,6 +20,9 @@ public class MemberList {
     private Long roomId;
     private String email;
     private Long balance;
+    private String title;
+    private String description;
+    private Long goalMoney;
 
     public MemberList toMemberList(MemberListEntity memberListEntity) {
         return MemberList.builder()
@@ -27,6 +30,9 @@ public class MemberList {
                 .roomId(memberListEntity.getRoomId())
                 .email(memberListEntity.getEmail())
                 .balance(memberListEntity.getBalance())
+                .title(memberListEntity.getTitle())
+                .description(memberListEntity.getDescription())
+                .goalMoney(memberListEntity.getGoalMoney())
                 .build();
     }
 

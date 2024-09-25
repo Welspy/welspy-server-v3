@@ -29,7 +29,7 @@ public class Room {
     private String imageUrl;
     private Category category;
     private RoomType roomType;
-    private Long productId;
+    private String productImageUrl;
 
     public Room toRoom(RoomEntity roomEntity) {
         return Room.builder()
@@ -42,7 +42,7 @@ public class Room {
                 .imageUrl(roomEntity.getImageUrl())
                 .category(roomEntity.getCategory())
                 .roomType(roomEntity.getRoomType())
-                .productId(roomEntity.getProductId())
+                .productImageUrl(roomEntity.getProductImageUrl())
                 .build();
     }
 

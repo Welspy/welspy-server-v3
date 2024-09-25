@@ -73,7 +73,7 @@ public class RoomQueryRepository {
                 roomEntity.imageUrl,
                 roomEntity.category,
                 roomEntity.roomType,
-                roomEntity.productId
+                roomEntity.productImageUrl
         );
     }
 

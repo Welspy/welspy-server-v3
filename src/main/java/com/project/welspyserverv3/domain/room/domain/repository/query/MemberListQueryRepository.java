@@ -45,7 +45,11 @@ public class MemberListQueryRepository {
         return Projections.constructor(MemberList.class,
                 memberListEntity.idx,
                 memberListEntity.roomId,
-                memberListEntity.email
+                memberListEntity.email,
+                memberListEntity.balance,
+                memberListEntity.title,
+                memberListEntity.description,
+                memberListEntity.goalMoney
         );
     }
 
