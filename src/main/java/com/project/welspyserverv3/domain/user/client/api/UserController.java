@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -26,6 +27,15 @@ public class UserController {
         return BaseResponseData.ok(
                 "유저 프로필 조회 성공",
                 userService.getUser()
+        );
+    }
+
+    @GetMapping("/email")
+    @Operation(summary = "유저 프로필 조회", description = "유저 프로필을 이메일을 기준으로 조회합니다.")
+    public BaseResponseData<User> getUserByEmail(@RequestParam String email){
+        return BaseResponseData.ok(
+                "유저 프로필 조회 성공",
+                userService.getUserByEmail(email)
         );
     }
 

@@ -22,6 +22,13 @@ public class UserService {
                 .orElseThrow(() -> UserNotFoundException.EXCEPTION);
     }
 
+    public User getUserByEmail(String email) {
+        return userJpaRepository
+                .findByEmail(email)
+                .map(userDTO::toUser)
+                .orElseThrow(() -> UserNotFoundException.EXCEPTION);
+    }
+
     public void userDelete(){
         User user = getUser();
         userJpaRepository.deleteByEmail(user.getEmail());
