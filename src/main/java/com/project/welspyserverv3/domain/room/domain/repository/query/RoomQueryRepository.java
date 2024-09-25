@@ -70,6 +70,7 @@ public class RoomQueryRepository {
                 roomEntity.description,
                 roomEntity.goalMoney,
                 roomEntity.memberLimit,
+                roomEntity.imageUrl,
                 roomEntity.category,
                 roomEntity.roomType
         );
