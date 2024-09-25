@@ -6,6 +6,7 @@ import com.project.welspyserverv3.domain.auth.client.dto.request.SignUpRequest;
 import com.project.welspyserverv3.domain.auth.service.AuthService;
 import com.project.welspyserverv3.domain.auth.service.response.JsonWebTokenResponse;
 import com.project.welspyserverv3.domain.auth.service.response.RefreshTokenResponse;
+import com.project.welspyserverv3.domain.auth.service.response.SignUpResponse;
 import com.project.welspyserverv3.global.common.dto.response.BaseResponse;
 import com.project.welspyserverv3.global.common.dto.response.BaseResponseData;
 import io.swagger.v3.oas.annotations.Operation;
@@ -30,9 +31,10 @@ public class AuthController {
     @PostMapping("/sign-up")
     @Operation(summary = "회원가입")
     @ResponseStatus(HttpStatus.CREATED)
-    public BaseResponse signUp(@Validated @RequestBody SignUpRequest signUpRequest){
-        authService.signUp(signUpRequest);
-        return BaseResponse.created("회원가입 성공");
+    public BaseResponseData<SignUpResponse> signUp(@Validated @RequestBody SignUpRequest request){
+        return BaseResponseData.created(
+                "회원가입 성공",
+                authService.signUp(request));
     }
 
     @PostMapping("/sign-in")

@@ -4,6 +4,8 @@ import com.project.welspyserverv3.domain.auth.client.dto.request.SignInRequest;
 import com.project.welspyserverv3.domain.auth.client.dto.request.SignUpRequest;
 import com.project.welspyserverv3.domain.auth.service.response.JsonWebTokenResponse;
 import com.project.welspyserverv3.domain.auth.service.response.RefreshTokenResponse;
+import com.project.welspyserverv3.domain.auth.service.response.SignUpResponse;
+import com.project.welspyserverv3.domain.bank.service.BankService;
 import com.project.welspyserverv3.domain.user.client.dto.User;
 import com.project.welspyserverv3.domain.user.domain.enums.UserRole;
 import com.project.welspyserverv3.domain.user.domain.repository.jpa.UserJpaRepository;
@@ -24,10 +26,12 @@ import org.springframework.stereotype.Service;
 public class AuthService {
 
     private final UserJpaRepository userJpaRepository;
+    private final BankService bankService;
     private final User userDTO;
     private final PasswordEncoder encoder;
     private final JwtProvider jwtProvider;
-    public void signUp(SignUpRequest request) {
+
+    public SignUpResponse signUp(SignUpRequest request) {
         if (checkUserByEmail(request.getEmail())){
             throw UserExistException.EXCEPTION;
         }
@@ -40,6 +44,9 @@ public class AuthService {
                         .userRole(UserRole.USER)
                         .build()
         ));
+        return SignUpResponse.builder()
+                .accountNumber(bankService.createAccount(request.getEmail()))
+                .build();
     }
 
     public JsonWebTokenResponse signIn(SignInRequest request) {
