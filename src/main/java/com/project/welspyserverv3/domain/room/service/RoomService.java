@@ -54,6 +54,16 @@ public class RoomService {
                 .build());
     }
 
+    public void exitRoom(Long roomId){
+        Room room = getRoomById(roomId);
+        memberListJpaRepository.deleteByRoomIdAndEmail(roomId, userSecurity.getUser().getEmail());
+        room.setCurrentMember(room.getCurrentMember() - 1);
+        if(room.getCurrentMember() == 0){
+            deleteRoom(roomId);
+        }
+        saveRoom(room);
+    }
+
     public void saveRoom(Room room){
         roomJpaRepository.save(RoomEntity.builder()
                 .roomId(room.getRoomId())
@@ -65,6 +75,10 @@ public class RoomService {
                 .roomType(room.getRoomType())
                 .build()
         );
+    }
+
+    public void deleteRoom(Long roomId){
+        roomJpaRepository.deleteByRoomId(roomId);
     }
 
     public void saveMemberList(MemberList memberList){

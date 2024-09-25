@@ -15,6 +15,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -105,6 +106,13 @@ public class RoomController {
         return BaseResponseData.ok(
                 "명단 출력 성공",
                 roomQueryService.roomMemberList(request));
+    }
+
+    @DeleteMapping
+    @Operation(summary = "방 탈퇴")
+    public BaseResponse exitRoom(@RequestParam Long roomId) {
+        roomService.exitRoom(roomId);
+        return BaseResponse.ok("방 탈퇴 성공");
     }
 
 }
