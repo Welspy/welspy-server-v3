@@ -4,6 +4,8 @@ import com.project.welspyserverv3.global.security.jwt.filter.JwtAuthenticationFi
 import com.project.welspyserverv3.global.security.jwt.filter.JwtExceptionFilter;
 import com.project.welspyserverv3.global.security.jwt.handler.JwtAuthenticationEntryPoint;
 import lombok.RequiredArgsConstructor;
+import org.apache.catalina.filters.CorsFilter;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -43,8 +45,6 @@ public class SecurityConfig{
                 .addFilterAfter(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
                 .addFilterBefore(jwtExceptionFilter, JwtAuthenticationFilter.class);
 
-        http.setSharedObject(CorsConfigurationSource.class, corsConfigurationSource());
-
         return http.build();
     }
 
@@ -54,17 +54,20 @@ public class SecurityConfig{
     }
 
     @Bean
-    public CorsConfigurationSource corsConfigurationSource() {
+    public FilterRegistrationBean<CorsFilter> corsConfigurationSource() {
         CorsConfiguration corsConfiguration = new CorsConfiguration();
         corsConfiguration.addAllowedOrigin("*");
-        corsConfiguration.addAllowedHeader("*");
+        corsConfiguration.addAllowedHeader("Access-Control-Allow-Origin");
         corsConfiguration.addAllowedMethod("*");
         corsConfiguration.setAllowCredentials(true);
+        corsConfiguration.setMaxAge(6000L);
 
-        UrlBasedCorsConfigurationSource urlBasedCorsConfigurationSource = new UrlBasedCorsConfigurationSource();
-        urlBasedCorsConfigurationSource.registerCorsConfiguration("/**", corsConfiguration);
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", corsConfiguration);
+        FilterRegistrationBean<CorsFilter> filterBean = new FilterRegistrationBean<>(new CorsFilter());
+        filterBean.setOrder(0);
 
-        return urlBasedCorsConfigurationSource;
+        return filterBean;
     }
 
 }
