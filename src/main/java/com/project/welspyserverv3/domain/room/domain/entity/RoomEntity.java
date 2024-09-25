@@ -37,6 +37,8 @@ public class RoomEntity {
     @Column(nullable = false)
     private int memberLimit;
 
+    private int currentMember;
+
     private String imageUrl;
 
     @Column(nullable = false)

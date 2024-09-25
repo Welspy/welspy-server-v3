@@ -29,6 +29,7 @@ public class RoomService {
                 .description(request.getDescription())
                 .goalMoney(request.getGoalMoney())
                 .memberLimit(request.getMemberLimit())
+                .currentMember(0)
                 .imageUrl(request.getImageUrl())
                 .category(request.getCategory())
                 .roomType(request.getRoomType())
@@ -38,9 +39,11 @@ public class RoomService {
 
     public void joinRoom(RoomJoinRequest request) {
         Room room = getRoomById(request.getRoomId());
-        if(room.getMemberLimit() + 1 > room.getMemberLimit()){
+        if(room.getCurrentMember() + 1 > room.getMemberLimit()){
             throw MemberLimitOverException.EXCEPTION;
         }
+        room.setCurrentMember(room.getCurrentMember() + 1);
+        saveRoom(room);
         saveMemberList(MemberList.builder()
                 .roomId(room.getRoomId())
                 .email(userSecurity.getUser().getEmail())
