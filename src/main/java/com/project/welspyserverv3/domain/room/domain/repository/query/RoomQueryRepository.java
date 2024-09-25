@@ -72,7 +72,8 @@ public class RoomQueryRepository {
                 roomEntity.memberLimit,
                 roomEntity.imageUrl,
                 roomEntity.category,
-                roomEntity.roomType
+                roomEntity.roomType,
+                roomEntity.productId
         );
     }
 

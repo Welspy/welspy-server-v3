@@ -16,5 +16,6 @@ public class RoomCreateRequest {
     private String imageUrl;
     private Category category;
     private RoomType roomType;
+    private Long productId;
 
 }

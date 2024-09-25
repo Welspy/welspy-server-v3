@@ -47,4 +47,7 @@ public class RoomEntity {
     @Enumerated(EnumType.STRING)
     private RoomType roomType;
 
+    @Column(nullable = false)
+    private Long productId;
+
 }
