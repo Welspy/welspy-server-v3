@@ -1,4 +1,4 @@
-package com.project.welspyserverv3.global.config;
+package com.project.welspyserverv3.global.config.web;
 
 import org.apache.hc.client5.http.classic.HttpClient;
 import org.apache.hc.client5.http.impl.classic.HttpClientBuilder;
