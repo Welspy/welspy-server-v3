@@ -57,7 +57,7 @@ public class SecurityConfig{
     public FilterRegistrationBean<CorsFilter> corsConfigurationSource() {
         CorsConfiguration corsConfiguration = new CorsConfiguration();
         corsConfiguration.addAllowedOrigin("*");
-        corsConfiguration.addAllowedHeader("Access-Control-Allow-Origin");
+        corsConfiguration.addAllowedHeader("*");
         corsConfiguration.addAllowedMethod("*");
         corsConfiguration.setAllowCredentials(true);
         corsConfiguration.setMaxAge(6000L);
