@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -41,6 +42,14 @@ public class ProductController {
     }
 
     @GetMapping
+    @Operation(summary = "제품 조회")
+    public BaseResponseData<Product> getProduct(@RequestParam Long idx){
+        return BaseResponseData.ok(
+                "조회 성공",
+                productService.getProduct(idx));
+    }
+
+    @GetMapping("/list")
     @Operation(summary = "제품 목록")
     public BaseResponseData<List<Product>> productList(@ModelAttribute PageRequest request) {
         return BaseResponseData.ok(
