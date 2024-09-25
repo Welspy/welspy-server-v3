@@ -1,6 +1,7 @@
 package com.project.welspyserverv3.domain.bank.service;
 
 import com.project.welspyserverv3.domain.bank.client.dto.Bank;
+import com.project.welspyserverv3.domain.bank.client.dto.request.ChargeMoneyRequest;
 import com.project.welspyserverv3.domain.bank.client.dto.request.SaveMoneyRequest;
 import com.project.welspyserverv3.domain.bank.domain.entity.BankEntity;
 import com.project.welspyserverv3.domain.bank.domain.repository.BankJpaRepository;
@@ -38,24 +39,14 @@ public class BankService {
     }
 
     public Long savingMoney(SaveMoneyRequest request){
-        String email = userSecurity.getUser().getEmail();
-
-        Bank bank = bankJpaRepository
-                .findByEmail(email)
-                .map(bankDto::toBank)
-                .orElseThrow(()-> BankNotFoundException.EXCEPTION);
+        Bank bank = getBankByEmail();
         if (bank.getBalance() - request.getMoney() < 0){
             throw BankErrorException.EXCEPTION;
         }
         bank.setBalance(bank.getBalance() - request.getMoney());
-        bankJpaRepository.save(BankEntity.builder()
-                .accountNumber(bank.getAccountNumber())
-                .email(bank.getEmail())
-                .balance(bank.getBalance())
-                .build());
-
+        saveBank(bank);
         MemberList memberList = memberListJpaRepository
-                .findByEmailAndRoomId(email, request.getMoney())
+                .findByEmailAndRoomId(userSecurity.getUser().getEmail(), request.getMoney())
                 .map(memberListDto::toMemberList)
                 .orElseThrow(()->UserNotFoundException.EXCEPTION);
         Long nowBalance = memberList.getBalance();
@@ -67,6 +58,28 @@ public class BankService {
                 .balance(memberList.getBalance())
                 .build());
         return bank.getBalance();
+    }
+
+    public Long chargeMoney(ChargeMoneyRequest request){
+        Bank bank = getBankByEmail();
+        bank.setBalance(bank.getBalance() + request.getMoney());
+        saveBank(bank);
+        return bank.getBalance();
+    }
+
+    public Bank getBankByEmail(){
+       return bankJpaRepository
+                .findByEmail(userSecurity.getUser().getEmail())
+                .map(bankDto::toBank)
+                .orElseThrow(()-> BankNotFoundException.EXCEPTION);
+    }
+
+    public void saveBank(Bank bank){
+        bankJpaRepository.save(BankEntity.builder()
+                .accountNumber(bank.getAccountNumber())
+                .balance(bank.getBalance())
+                .email(bank.getEmail())
+                .build());
     }
 
 }

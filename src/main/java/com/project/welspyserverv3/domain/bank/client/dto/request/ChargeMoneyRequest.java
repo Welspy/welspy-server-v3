@@ -6,9 +6,8 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class SaveMoneyRequest {
+public class ChargeMoneyRequest {
 
-    private Long roomId;
     @Positive
     private Long money;
 
