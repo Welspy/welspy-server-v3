@@ -2,6 +2,7 @@ package com.project.welspyserverv3.domain.room.service;
 
 import com.project.welspyserverv3.domain.room.client.dto.MemberList;
 import com.project.welspyserverv3.domain.room.client.dto.Room;
+import com.project.welspyserverv3.domain.room.client.dto.request.RoomMemberListRequest;
 import com.project.welspyserverv3.domain.room.client.dto.request.RoomSearchRequest;
 import com.project.welspyserverv3.domain.room.domain.repository.query.MemberListQueryRepository;
 import com.project.welspyserverv3.domain.room.domain.repository.query.RoomQueryRepository;
@@ -38,6 +39,10 @@ public class RoomQueryService {
 
     public List<MemberList> myRoomList(PageRequest request){
         return memberListQueryRepository.myRoomList(request, userSecurity.getUser().getEmail());
+    }
+
+    public List<MemberList> roomMemberList (RoomMemberListRequest request){
+        return memberListQueryRepository.roomMemberList(request);
     }
 
 }
