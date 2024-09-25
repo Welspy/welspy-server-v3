@@ -33,6 +33,7 @@ public class RoomService {
                 .imageUrl(request.getImageUrl())
                 .category(request.getCategory())
                 .roomType(request.getRoomType())
+                .productId(request.getProductId())
                 .productImageUrl(request.getProductImageUrl())
                 .build());
     }

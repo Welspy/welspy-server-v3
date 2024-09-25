@@ -49,6 +49,8 @@ public class RoomEntity {
     @Enumerated(EnumType.STRING)
     private RoomType roomType;
 
+    private Long productId;
+
     private String productImageUrl;
 
 }
