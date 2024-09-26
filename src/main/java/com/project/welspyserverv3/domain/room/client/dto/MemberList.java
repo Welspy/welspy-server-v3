@@ -26,6 +26,18 @@ public class MemberList {
     private Long goalMoney;
     private String productImageUrl;
 
+    public MemberList(Long balance, String description, String email, Long goalMoney, Long idx, String name, String productImageUrl, Long roomId, String title) {
+        this.balance = balance;
+        this.description = description;
+        this.email = email;
+        this.goalMoney = goalMoney;
+        this.idx = idx;
+        this.name = name;
+        this.productImageUrl = productImageUrl;
+        this.roomId = roomId;
+        this.title = title;
+    }
+
     public MemberList toMemberList(MemberListEntity memberListEntity) {
         return MemberList.builder()
                 .idx(memberListEntity.getIdx())
