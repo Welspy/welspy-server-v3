@@ -9,6 +9,8 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -37,6 +39,12 @@ public class UserController {
                 "유저 프로필 조회 성공",
                 userService.getUserByEmail(email)
         );
+    }
+
+    @PatchMapping
+    public BaseResponse editUser(@RequestBody User user){
+        userService.editUser(user);
+        return BaseResponse.ok("수정 성공");
     }
 
     @DeleteMapping
