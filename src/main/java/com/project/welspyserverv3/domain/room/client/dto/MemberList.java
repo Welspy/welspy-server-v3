@@ -11,9 +11,7 @@ import org.springframework.stereotype.Component;
 @Getter
 @Setter
 @Builder
-@Component
 @AllArgsConstructor
-@NoArgsConstructor
 public class MemberList {
 
     private Long idx;
@@ -25,31 +23,5 @@ public class MemberList {
     private String description;
     private Long goalMoney;
     private String productImageUrl;
-
-    public MemberList(Long balance, String description, String email, Long goalMoney, Long idx, String name, String productImageUrl, Long roomId, String title) {
-        this.balance = balance;
-        this.description = description;
-        this.email = email;
-        this.goalMoney = goalMoney;
-        this.idx = idx;
-        this.name = name;
-        this.productImageUrl = productImageUrl;
-        this.roomId = roomId;
-        this.title = title;
-    }
-
-    public MemberList toMemberList(MemberListEntity memberListEntity) {
-        return MemberList.builder()
-                .idx(memberListEntity.getIdx())
-                .roomId(memberListEntity.getRoomId())
-                .email(memberListEntity.getEmail())
-                .balance(memberListEntity.getBalance())
-                .name(memberListEntity.getName())
-                .title(memberListEntity.getTitle())
-                .description(memberListEntity.getDescription())
-                .goalMoney(memberListEntity.getGoalMoney())
-                .productImageUrl(memberListEntity.getProductImageUrl())
-                .build();
-    }
 
 }

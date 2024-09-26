@@ -12,6 +12,7 @@ import com.project.welspyserverv3.domain.bank.exception.BankErrorException;
 import com.project.welspyserverv3.domain.bank.exception.BankNotFoundException;
 import com.project.welspyserverv3.domain.room.client.dto.MemberList;
 import com.project.welspyserverv3.domain.room.domain.entity.MemberListEntity;
+import com.project.welspyserverv3.domain.room.domain.mapper.MemberListMapper;
 import com.project.welspyserverv3.domain.room.domain.repository.jpa.MemberListJpaRepository;
 import com.project.welspyserverv3.domain.user.exception.UserNotFoundException;
 import com.project.welspyserverv3.global.common.repository.UserSecurity;
@@ -28,7 +29,7 @@ public class BankService {
     private final MemberListJpaRepository memberListJpaRepository;
     private final BankLogJpaRepository bankLogJpaRepository;
     private final UserSecurity userSecurity;
-    private final MemberList memberListDto;
+    private final MemberListMapper memberListMapper;
     private final Bank bankDto;
 
     public String createAccount(String email){
@@ -56,7 +57,7 @@ public class BankService {
                 .build());
         MemberList memberList = memberListJpaRepository
                 .findByEmailAndRoomId(userSecurity.getUser().getEmail(), request.getMoney())
-                .map(memberListDto::toMemberList)
+                .map(memberListMapper::toMemberList)
                 .orElseThrow(()->UserNotFoundException.EXCEPTION);
         Long nowBalance = memberList.getBalance();
         memberList.setBalance(nowBalance + request.getMoney());
