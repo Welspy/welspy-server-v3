@@ -74,8 +74,11 @@ public class RoomService {
                 .description(room.getDescription())
                 .goalMoney(room.getGoalMoney())
                 .memberLimit(room.getMemberLimit())
+                .currentMember(room.getCurrentMember())
                 .category(room.getCategory())
                 .roomType(room.getRoomType())
+                .productId(room.getProductId())
+                .productImageUrl(room.getProductImageUrl())
                 .build()
         );
     }
