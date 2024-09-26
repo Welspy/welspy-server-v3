@@ -41,7 +41,7 @@ public class RoomQueryService {
         return memberListQueryRepository.myRoomList(request, userSecurity.getUser().getEmail());
     }
 
-    public List<MemberList> roomMemberList (RoomMemberListRequest request){
+    public List<RoomMemberListRequest> roomMemberList (RoomMemberListRequest request){
         return memberListQueryRepository.roomMemberList(request);
     }
 

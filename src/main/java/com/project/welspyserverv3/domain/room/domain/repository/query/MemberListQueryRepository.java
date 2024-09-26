@@ -2,6 +2,7 @@ package com.project.welspyserverv3.domain.room.domain.repository.query;
 
 import com.project.welspyserverv3.domain.room.client.dto.MemberList;
 import com.project.welspyserverv3.domain.room.client.dto.request.RoomMemberListRequest;
+import com.project.welspyserverv3.domain.room.service.response.RoomMemberListResponse;
 import com.project.welspyserverv3.global.common.dto.request.PageRequest;
 import com.querydsl.core.types.ConstructorExpression;
 import com.querydsl.core.types.Projections;
@@ -30,9 +31,9 @@ public class MemberListQueryRepository {
                 .fetch();
     }
 
-    public List<MemberList> roomMemberList(RoomMemberListRequest request) {
+    public List<RoomMemberListResponse> roomMemberList(RoomMemberListRequest request) {
         return jpaQueryFactory
-                .select(memberListConstructorExpression())
+                .select(roomMemberListConstructorExpression())
                 .from(memberListEntity)
                 .where(memberListEntity.roomId.eq(request.getRoomId()))
                 .offset((long) (request.getPage() - 1) * request.getSize())
@@ -51,6 +52,15 @@ public class MemberListQueryRepository {
                 memberListEntity.description,
                 memberListEntity.goalMoney,
                 memberListEntity.productImageUrl
+        );
+    }
+
+    private ConstructorExpression<RoomMemberListResponse> roomMemberListConstructorExpression(){
+        return Projections.constructor(RoomMemberListResponse.class,
+                memberListEntity.idx,
+                memberListEntity.roomId,
+                memberListEntity.email,
+                memberListEntity.balance
         );
     }
 
