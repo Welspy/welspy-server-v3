@@ -13,5 +13,6 @@ public class RoomMemberListResponse {
     private Long roomId;
     private String email;
     private Long balance;
+    private String name;
 
 }

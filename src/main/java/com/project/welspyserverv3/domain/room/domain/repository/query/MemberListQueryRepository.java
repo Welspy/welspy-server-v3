@@ -60,7 +60,8 @@ public class MemberListQueryRepository {
                 memberListEntity.idx,
                 memberListEntity.roomId,
                 memberListEntity.email,
-                memberListEntity.balance
+                memberListEntity.balance,
+                memberListEntity.name
         );
     }
 

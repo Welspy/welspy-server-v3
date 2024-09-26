@@ -29,6 +29,9 @@ public class MemberListEntity {
 
     private Long balance;
 
+    @Column(nullable = false)
+    private String name;
+
     private String title;
 
     private String description;
