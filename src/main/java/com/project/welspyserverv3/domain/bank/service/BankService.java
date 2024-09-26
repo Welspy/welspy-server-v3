@@ -56,7 +56,7 @@ public class BankService {
                 .bankType(BankType.SEND)
                 .build());
         MemberList memberList = memberListJpaRepository
-                .findByEmailAndRoomId(userSecurity.getUser().getEmail(), request.getMoney())
+                .findByEmailAndRoomId(userSecurity.getUser().getEmail(), request.getRoomId())
                 .map(memberListMapper::toMemberList)
                 .orElseThrow(()->UserNotFoundException.EXCEPTION);
         Long nowBalance = memberList.getBalance();
