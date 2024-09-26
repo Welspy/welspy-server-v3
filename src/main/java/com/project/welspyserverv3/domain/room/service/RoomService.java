@@ -96,6 +96,11 @@ public class RoomService {
                 .idx(memberList.getIdx())
                 .roomId(memberList.getRoomId())
                 .email(memberList.getEmail())
+                .balance(memberList.getBalance())
+                .title(memberList.getTitle())
+                .description(memberList.getDescription())
+                .goalMoney(memberList.getGoalMoney())
+                .productImageUrl(memberList.getProductImageUrl())
                 .build());
     }
 
