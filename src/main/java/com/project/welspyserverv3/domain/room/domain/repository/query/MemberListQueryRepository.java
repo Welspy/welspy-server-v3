@@ -48,6 +48,7 @@ public class MemberListQueryRepository {
                 memberListEntity.roomId,
                 memberListEntity.email,
                 memberListEntity.balance,
+                memberListEntity.name,
                 memberListEntity.title,
                 memberListEntity.description,
                 memberListEntity.goalMoney,

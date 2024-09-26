@@ -1,17 +1,16 @@
 package com.project.welspyserverv3.domain.room.client.dto;
 
-import com.project.welspyserverv3.domain.room.domain.entity.MemberListEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.stereotype.Component;
 
 @Getter
 @Setter
 @Builder
 @AllArgsConstructor
+@NoArgsConstructor
 public class MemberList {
 
     private Long idx;
