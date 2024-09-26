@@ -66,6 +66,11 @@ public class BankService {
                 .roomId(memberList.getRoomId())
                 .email(memberList.getEmail())
                 .balance(memberList.getBalance())
+                .name(memberList.getName())
+                .title(memberList.getTitle())
+                .description(memberList.getDescription())
+                .goalMoney(memberList.getGoalMoney())
+                .productImageUrl(memberList.getProductImageUrl())
                 .build());
         return bank.getBalance();
     }
