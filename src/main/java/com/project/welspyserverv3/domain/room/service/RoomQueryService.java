@@ -6,6 +6,7 @@ import com.project.welspyserverv3.domain.room.client.dto.request.RoomMemberListR
 import com.project.welspyserverv3.domain.room.client.dto.request.RoomSearchRequest;
 import com.project.welspyserverv3.domain.room.domain.repository.query.MemberListQueryRepository;
 import com.project.welspyserverv3.domain.room.domain.repository.query.RoomQueryRepository;
+import com.project.welspyserverv3.domain.room.service.response.RoomMemberListResponse;
 import com.project.welspyserverv3.global.common.dto.request.PageRequest;
 import com.project.welspyserverv3.global.common.repository.UserSecurity;
 import lombok.RequiredArgsConstructor;
@@ -41,7 +42,7 @@ public class RoomQueryService {
         return memberListQueryRepository.myRoomList(request, userSecurity.getUser().getEmail());
     }
 
-    public List<RoomMemberListRequest> roomMemberList (RoomMemberListRequest request){
+    public List<RoomMemberListResponse> roomMemberList (RoomMemberListRequest request){
         return memberListQueryRepository.roomMemberList(request);
     }
 

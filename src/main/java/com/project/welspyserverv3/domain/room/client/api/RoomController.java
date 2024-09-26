@@ -8,6 +8,7 @@ import com.project.welspyserverv3.domain.room.client.dto.request.RoomMemberListR
 import com.project.welspyserverv3.domain.room.client.dto.request.RoomSearchRequest;
 import com.project.welspyserverv3.domain.room.service.RoomQueryService;
 import com.project.welspyserverv3.domain.room.service.RoomService;
+import com.project.welspyserverv3.domain.room.service.response.RoomMemberListResponse;
 import com.project.welspyserverv3.global.common.dto.request.PageRequest;
 import com.project.welspyserverv3.global.common.dto.response.BaseResponse;
 import com.project.welspyserverv3.global.common.dto.response.BaseResponseData;
@@ -102,7 +103,7 @@ public class RoomController {
 
     @GetMapping("/member")
     @Operation(summary = "방에 가입한 명단 출력")
-    public BaseResponseData<List<MemberList>> memberList(@ModelAttribute RoomMemberListRequest request) {
+    public BaseResponseData<List<RoomMemberListResponse>> memberList(@ModelAttribute RoomMemberListRequest request) {
         return BaseResponseData.ok(
                 "명단 출력 성공",
                 roomQueryService.roomMemberList(request));
