@@ -19,6 +19,11 @@ spring:
     host: ${secrets.REDIS_HOST}
     port: ${secrets.REDIS_PORT}
 
+  security:
+    user:
+      name: ${secrets.SECURITY_NAME}
+      password: ${secrets.SECURITY_PASSWORD}
+
   jpa:
     database: mysql
     database-platform: org.hibernate.dialect.MySQL8Dialect
