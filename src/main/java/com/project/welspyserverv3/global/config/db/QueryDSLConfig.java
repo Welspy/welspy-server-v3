@@ -1,4 +1,4 @@
-package com.project.welspyserverv3.global.config.query;
+package com.project.welspyserverv3.global.config.db.query;
 
 
 import com.querydsl.jpa.impl.JPAQueryFactory;

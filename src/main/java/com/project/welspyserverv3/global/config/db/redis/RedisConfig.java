@@ -1,4 +1,4 @@
-package com.project.welspyserverv3.global.config.redis;
+package com.project.welspyserverv3.global.config.db.redis;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
