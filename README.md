@@ -4,5 +4,5 @@
 
 ## 사용 스택
 - Java
-- Spring boot
+- Spring boot 3
 - MySQL
