@@ -17,13 +17,12 @@ public class ProductService {
 
     public void createProduct(CreateProductRequest request) {
         Long price = request.getPrice();
-        Long discountedPrice = price - (price * request.getDiscount() / 100);
         productJpaRepository.save(ProductEntity.builder()
                 .name(request.getName())
                 .description(request.getDescription())
                 .price(request.getPrice())
                 .discount(request.getDiscount())
-                .discountedPrice(discountedPrice)
+                .discountedPrice(price - (price * request.getDiscount() / 100))
                 .imageUrl(request.getImageUrl())
                 .build()
         );
