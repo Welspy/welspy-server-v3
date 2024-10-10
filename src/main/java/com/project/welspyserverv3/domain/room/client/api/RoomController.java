@@ -8,6 +8,7 @@ import com.project.welspyserverv3.domain.room.client.dto.request.RoomMemberListR
 import com.project.welspyserverv3.domain.room.client.dto.request.RoomSearchRequest;
 import com.project.welspyserverv3.domain.room.service.RoomQueryService;
 import com.project.welspyserverv3.domain.room.service.RoomService;
+import com.project.welspyserverv3.domain.room.service.response.MyRoomListResponse;
 import com.project.welspyserverv3.domain.room.service.response.RoomMemberListResponse;
 import com.project.welspyserverv3.global.common.dto.request.PageRequest;
 import com.project.welspyserverv3.global.common.dto.response.BaseResponse;

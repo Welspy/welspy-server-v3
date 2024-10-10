@@ -38,6 +38,6 @@ public class MemberListEntity {
 
     private Long goalMoney;
 
-    private String productImageUrl;
+    private String imageUrl;
 
 }

@@ -2,6 +2,7 @@ package com.project.welspyserverv3.domain.room.domain.repository.query;
 
 import com.project.welspyserverv3.domain.room.client.dto.MemberList;
 import com.project.welspyserverv3.domain.room.client.dto.request.RoomMemberListRequest;
+import com.project.welspyserverv3.domain.room.service.response.MyRoomListResponse;
 import com.project.welspyserverv3.domain.room.service.response.RoomMemberListResponse;
 import com.project.welspyserverv3.global.common.dto.request.PageRequest;
 import com.querydsl.core.types.ConstructorExpression;
@@ -51,7 +52,8 @@ public class MemberListQueryRepository {
                 memberListEntity.name,
                 memberListEntity.title,
                 memberListEntity.description,
-                memberListEntity.goalMoney
+                memberListEntity.goalMoney,
+                memberListEntity.imageUrl
         );
     }
 

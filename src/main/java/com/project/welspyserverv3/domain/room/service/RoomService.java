@@ -57,6 +57,7 @@ public class RoomService {
                 .title(room.getTitle())
                 .description(room.getDescription())
                 .goalMoney(room.getGoalMoney())
+                .imageUrl(room.getImageUrl())
                 .build());
     }
 
@@ -97,7 +98,9 @@ public class RoomService {
                 .title(memberList.getTitle())
                 .description(memberList.getDescription())
                 .goalMoney(memberList.getGoalMoney())
+                .imageUrl(memberList.getImageUrl())
                 .build());
+
     }
 
     public Room getRoomById(Long roomId){
