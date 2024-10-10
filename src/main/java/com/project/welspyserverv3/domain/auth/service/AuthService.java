@@ -7,6 +7,7 @@ import com.project.welspyserverv3.domain.auth.service.response.RefreshTokenRespo
 import com.project.welspyserverv3.domain.auth.service.response.SignUpResponse;
 import com.project.welspyserverv3.domain.bank.service.BankService;
 import com.project.welspyserverv3.domain.user.client.dto.User;
+import com.project.welspyserverv3.domain.user.domain.entity.UserEntity;
 import com.project.welspyserverv3.domain.user.domain.enums.UserRole;
 import com.project.welspyserverv3.domain.user.domain.repository.jpa.UserJpaRepository;
 import com.project.welspyserverv3.domain.user.exception.PasswordWrongException;
@@ -27,7 +28,6 @@ public class AuthService {
 
     private final UserJpaRepository userJpaRepository;
     private final BankService bankService;
-    private final User userDTO;
     private final PasswordEncoder encoder;
     private final JwtProvider jwtProvider;
 
@@ -35,15 +35,15 @@ public class AuthService {
         if (checkUserByEmail(request.getEmail())){
             throw UserExistException.EXCEPTION;
         }
-        userJpaRepository.save(userDTO.toUserEntity(
-                User.builder()
-                        .email(request.getEmail())
-                        .name(request.getName())
-                        .phoneNumber(request.getPhoneNumber())
-                        .password(encoder.encode(request.getPassword()))
-                        .userRole(UserRole.USER)
-                        .build()
-        ));
+        userJpaRepository.save(UserEntity.builder()
+                .email(request.getEmail())
+                .name(request.getName())
+                .phoneNumber(request.getPhoneNumber())
+                .password(encoder.encode(request.getPassword()))
+                .imageUrl(request.getImageUrl())
+                .userRole(UserRole.USER)
+                .build()
+        );
         return SignUpResponse.builder()
                 .accountNumber(bankService.createAccount(request.getEmail()))
                 .build();

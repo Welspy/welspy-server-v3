@@ -21,6 +21,7 @@ public class User {
     private String name;
     private String phoneNumber;
     private String password;
+    private String imageUrl;
     private UserRole userRole;
 
     public User toUser(UserEntity userEntity){
@@ -29,17 +30,8 @@ public class User {
                 .name(userEntity.getName())
                 .phoneNumber(userEntity.getPhoneNumber())
                 .password(userEntity.getPassword())
+                .imageUrl(userEntity.getImageUrl())
                 .userRole(userEntity.getUserRole())
-                .build();
-    }
-
-    public UserEntity toUserEntity(User user){
-        return UserEntity.builder()
-                .email(user.email)
-                .name(user.name)
-                .phoneNumber(user.phoneNumber)
-                .password(user.password)
-                .userRole(user.userRole)
                 .build();
     }
 
