@@ -66,9 +66,6 @@ public class RoomService {
         Room room = getRoomById(roomId);
         memberListJpaRepository.deleteByRoomIdAndEmail(roomId, userSecurity.getUser().getEmail());
         room.setCurrentMember(room.getCurrentMember() - 1);
-        if(room.getCurrentMember() == 0){
-            deleteRoom(roomId);
-        }
         saveRoom(room);
     }
 

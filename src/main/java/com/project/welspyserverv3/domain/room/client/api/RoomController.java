@@ -109,11 +109,19 @@ public class RoomController {
                 roomQueryService.roomMemberList(request));
     }
 
-    @DeleteMapping
+    @DeleteMapping("/exit")
     @Operation(summary = "방 탈퇴")
     public BaseResponse exitRoom(@RequestParam Long roomId) {
         roomService.exitRoom(roomId);
         return BaseResponse.ok("방 탈퇴 성공");
     }
+
+    @DeleteMapping
+    @Operation(summary = "방 삭제")
+    public BaseResponse deleteRoom(@RequestParam Long roomId) {
+        roomService.deleteRoom(roomId);
+        return BaseResponse.ok("방 삭제 성공");
+    }
+
 
 }
