@@ -70,7 +70,6 @@ public class BankService {
                 .title(memberList.getTitle())
                 .description(memberList.getDescription())
                 .goalMoney(memberList.getGoalMoney())
-                .productImageUrl(memberList.getProductImageUrl())
                 .build());
         return bank.getBalance();
     }

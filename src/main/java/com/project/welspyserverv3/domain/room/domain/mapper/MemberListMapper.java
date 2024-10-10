@@ -17,7 +17,6 @@ public class MemberListMapper {
                 .title(memberListEntity.getTitle())
                 .description(memberListEntity.getDescription())
                 .goalMoney(memberListEntity.getGoalMoney())
-                .productImageUrl(memberListEntity.getProductImageUrl())
                 .build();
     }
 
