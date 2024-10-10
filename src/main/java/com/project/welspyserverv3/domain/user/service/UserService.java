@@ -1,5 +1,6 @@
 package com.project.welspyserverv3.domain.user.service;
 
+import com.project.welspyserverv3.domain.room.domain.repository.jpa.MemberListJpaRepository;
 import com.project.welspyserverv3.domain.user.client.dto.User;
 import com.project.welspyserverv3.domain.user.domain.entity.UserEntity;
 import com.project.welspyserverv3.domain.user.domain.repository.jpa.UserJpaRepository;
@@ -15,6 +16,7 @@ public class UserService {
     private final UserJpaRepository userJpaRepository;
     private final UserSecurity userSecurity;
     private final User userDTO;
+    private final MemberListJpaRepository memberListJpaRepository;
 
     public User getUser() {
         return userJpaRepository
@@ -33,6 +35,7 @@ public class UserService {
     public void userDelete(){
         User user = getUser();
         userJpaRepository.deleteByEmail(user.getEmail());
+        memberListJpaRepository.deleteByEmail(user.getEmail());
     }
 
     public void editUser(User requestUser) {

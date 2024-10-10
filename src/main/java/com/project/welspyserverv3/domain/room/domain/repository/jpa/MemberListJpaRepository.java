@@ -10,4 +10,6 @@ public interface MemberListJpaRepository extends JpaRepository<MemberListEntity,
     Optional<MemberListEntity> findByEmailAndRoomId(String email, Long roomId);
     @Transactional(rollbackOn = Exception.class)
     void deleteByRoomIdAndEmail(Long roomId, String email);
+    @Transactional(rollbackOn = Exception.class)
+    void deleteByEmail(String email);
 }

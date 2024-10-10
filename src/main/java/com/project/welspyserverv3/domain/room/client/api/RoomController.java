@@ -123,5 +123,4 @@ public class RoomController {
         return BaseResponse.ok("방 삭제 성공");
     }
 
-
 }
