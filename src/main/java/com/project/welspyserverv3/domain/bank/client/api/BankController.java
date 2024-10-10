@@ -6,6 +6,7 @@ import com.project.welspyserverv3.domain.bank.client.dto.request.ChargeMoneyRequ
 import com.project.welspyserverv3.domain.bank.client.dto.request.SaveMoneyRequest;
 import com.project.welspyserverv3.domain.bank.service.BankQueryService;
 import com.project.welspyserverv3.domain.bank.service.BankService;
+import com.project.welspyserverv3.domain.bank.service.response.MyBankResponse;
 import com.project.welspyserverv3.global.common.dto.request.PageRequest;
 import com.project.welspyserverv3.global.common.dto.response.BaseResponseData;
 import io.swagger.v3.oas.annotations.Operation;
@@ -31,10 +32,10 @@ public class BankController {
 
     @GetMapping
     @Operation(summary = "내 뱅킹 정보 조회")
-    public BaseResponseData<Bank> myBank(){
+    public BaseResponseData<MyBankResponse> myBank(){
         return BaseResponseData.ok(
                 "조회 성공",
-                bankService.getBankByEmail());
+                bankService.myBank());
     }
 
     @GetMapping("/log-all")

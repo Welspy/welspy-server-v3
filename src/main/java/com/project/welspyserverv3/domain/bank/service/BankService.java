@@ -10,10 +10,12 @@ import com.project.welspyserverv3.domain.bank.domain.repository.jpa.BankJpaRepos
 import com.project.welspyserverv3.domain.bank.domain.repository.jpa.BankLogJpaRepository;
 import com.project.welspyserverv3.domain.bank.exception.BankErrorException;
 import com.project.welspyserverv3.domain.bank.exception.BankNotFoundException;
+import com.project.welspyserverv3.domain.bank.service.response.MyBankResponse;
 import com.project.welspyserverv3.domain.room.client.dto.MemberList;
 import com.project.welspyserverv3.domain.room.domain.entity.MemberListEntity;
 import com.project.welspyserverv3.domain.room.domain.mapper.MemberListMapper;
 import com.project.welspyserverv3.domain.room.domain.repository.jpa.MemberListJpaRepository;
+import com.project.welspyserverv3.domain.user.client.dto.User;
 import com.project.welspyserverv3.domain.user.exception.UserNotFoundException;
 import com.project.welspyserverv3.global.common.repository.UserSecurity;
 import lombok.RequiredArgsConstructor;
@@ -31,6 +33,7 @@ public class BankService {
     private final UserSecurity userSecurity;
     private final MemberListMapper memberListMapper;
     private final Bank bankDto;
+    private final MyBankResponse myBankResponse;
 
     public String createAccount(String email){
         String accountNumber = UUID.randomUUID().toString();
@@ -79,6 +82,12 @@ public class BankService {
         bank.setBalance(bank.getBalance() + request.getMoney());
         saveBank(bank);
         return bank.getBalance();
+    }
+
+    public MyBankResponse myBank(){
+        Bank bank = getBankByEmail();
+        User user = userSecurity.getUser();
+        return myBankResponse.toMyBankResponse(bank, user);
     }
 
     public Bank getBankByEmail(){
