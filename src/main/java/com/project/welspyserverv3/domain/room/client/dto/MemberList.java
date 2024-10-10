@@ -21,6 +21,5 @@ public class MemberList {
     private String title;
     private String description;
     private Long goalMoney;
-    private String productImageUrl;
 
 }

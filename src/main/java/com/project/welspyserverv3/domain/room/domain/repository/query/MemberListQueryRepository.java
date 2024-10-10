@@ -51,8 +51,7 @@ public class MemberListQueryRepository {
                 memberListEntity.name,
                 memberListEntity.title,
                 memberListEntity.description,
-                memberListEntity.goalMoney,
-                memberListEntity.productImageUrl
+                memberListEntity.goalMoney
         );
     }
 

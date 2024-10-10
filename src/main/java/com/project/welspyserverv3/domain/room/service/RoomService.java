@@ -35,7 +35,6 @@ public class RoomService {
                 .category(request.getCategory())
                 .roomType(request.getRoomType())
                 .productId(request.getProductId())
-                .productImageUrl(request.getProductImageUrl())
                 .build()
         );
     }
@@ -58,7 +57,6 @@ public class RoomService {
                 .title(room.getTitle())
                 .description(room.getDescription())
                 .goalMoney(room.getGoalMoney())
-                .productImageUrl(room.getProductImageUrl())
                 .build());
     }
 
@@ -80,7 +78,6 @@ public class RoomService {
                 .category(room.getCategory())
                 .roomType(room.getRoomType())
                 .productId(room.getProductId())
-                .productImageUrl(room.getProductImageUrl())
                 .build()
         );
     }
@@ -99,7 +96,6 @@ public class RoomService {
                 .title(memberList.getTitle())
                 .description(memberList.getDescription())
                 .goalMoney(memberList.getGoalMoney())
-                .productImageUrl(memberList.getProductImageUrl())
                 .build());
     }
 

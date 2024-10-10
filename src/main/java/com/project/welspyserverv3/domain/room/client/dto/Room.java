@@ -30,9 +30,8 @@ public class Room {
     private Category category;
     private RoomType roomType;
     private Long productId;
-    private String productImageUrl;
 
-    public Room(Long roomId, String title, String description, Long goalMoney, int memberLimit, String imageUrl, Category category, RoomType roomType, Long productId, String productImageUrl) {
+    public Room(Long roomId, String title, String description, Long goalMoney, int memberLimit, String imageUrl, Category category, RoomType roomType, Long productId) {
         this.roomId = roomId;
         this.title = title;
         this.description = description;
@@ -42,7 +41,6 @@ public class Room {
         this.category = category;
         this.roomType = roomType;
         this.productId = productId;
-        this.productImageUrl = productImageUrl;
     }
 
     public Room toRoom(RoomEntity roomEntity) {
@@ -57,7 +55,6 @@ public class Room {
                 .category(roomEntity.getCategory())
                 .roomType(roomEntity.getRoomType())
                 .productId(roomEntity.getProductId())
-                .productImageUrl(roomEntity.getProductImageUrl())
                 .build();
     }
 
