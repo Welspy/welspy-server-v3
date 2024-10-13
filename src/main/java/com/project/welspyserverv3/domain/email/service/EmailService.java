@@ -1,7 +1,7 @@
 package com.project.welspyserverv3.domain.email.service;
 
 import com.project.welspyserverv3.global.common.dto.response.BaseResponse;
-import com.project.welspyserverv3.global.config.db.redis.RedisConfig;
+import com.project.welspyserverv3.global.config.infra.redis.RedisConfig;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import lombok.RequiredArgsConstructor;

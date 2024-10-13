@@ -1,4 +1,4 @@
-package com.project.welspyserverv3.global.config.s3;
+package com.project.welspyserverv3.global.config.infra.s3;
 
 import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.AWSStaticCredentialsProvider;
