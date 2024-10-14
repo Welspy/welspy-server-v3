@@ -43,6 +43,7 @@ public class SecurityConfig{
                                 .requestMatchers("/email/**").permitAll()
                                 .requestMatchers("/product/**").permitAll()
                                 .requestMatchers("/s3/**").permitAll()
+                                .requestMatchers("/data/**").permitAll()
                                 .anyRequest().authenticated()
                 )
                 .addFilterAfter(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
