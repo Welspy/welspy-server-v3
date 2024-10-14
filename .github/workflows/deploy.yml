@@ -25,8 +25,8 @@ jobs:
         spring.datasource.password: ${{ secrets.DB_PASSWORD }}
         application.jwt.secretKey: ${{ secrets.JWT_SECRET_KEY }}
         spring.mail.password: ${{ secrets.MAIL_PASSWORD }}
-        spring.redis.host: ${{ secrets.REDIS_HOST }}
-        spring.redis.port: ${{ secrets.REDIS_PORT }}
+        spring.data.redis.host: ${{ secrets.REDIS_HOST }}
+        spring.data.redis.port: ${{ secrets.REDIS_PORT }}
         spring.security.user.name: ${{ secrets.SECURITY_NAME }}
         spring.security.user.password: ${{ secrets.SECURITY_PASSWORD }}
         cloud.aws.credentials.accessKey: ${{ secrets.S3_ACCESS_KEY }}
