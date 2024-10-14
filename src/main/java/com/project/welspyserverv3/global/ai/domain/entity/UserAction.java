@@ -3,6 +3,8 @@ package com.project.welspyserverv3.global.ai.domain.entity;
 import com.project.welspyserverv3.domain.room.domain.enums.Category;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -11,7 +13,8 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
-import org.joda.time.DateTime;
+
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -31,9 +34,10 @@ public class UserAction {
     private String userEmail;
 
     @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private Category category;
 
     @Column(nullable = false)
-    private DateTime startTime;
+    private LocalDateTime startTime;
 
 }

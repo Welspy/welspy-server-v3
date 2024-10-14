@@ -6,7 +6,8 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.joda.time.DateTime;
+
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -19,6 +20,6 @@ public class DataResponse {
     private Long challengeId;
     private String userEmail;
     private Category category;
-    private DateTime startTime;
+    private LocalDateTime startTime;
 
 }

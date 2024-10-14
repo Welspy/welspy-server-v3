@@ -18,6 +18,12 @@ public class UserActionQueryRepository {
     private final JPAQueryFactory jpaQueryFactory;
 
     public List<DataResponse> getAllUserActions() {
+        List<DataResponse> results = jpaQueryFactory
+                .select(userActionConstructorExpression())
+                .from(userAction)
+                .orderBy(userAction.id.asc())
+                .fetch();
+        System.out.println("Fetched results: " + results);
         return jpaQueryFactory
                 .select(userActionConstructorExpression())
                 .from(userAction)
