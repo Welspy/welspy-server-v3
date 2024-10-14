@@ -13,9 +13,10 @@ spring:
     properties:
       mail.smtp.auth: true
       mail.smtp.starttls.enable: true
-  redis:
-    host: ${secrets.REDIS_HOST}
-    port: ${secrets.REDIS_PORT}
+  data:
+    redis:
+      host: ${secrets.REDIS_HOST}
+      port: ${secrets.REDIS_PORT}
   security:
     user:
       name: ${secrets.SECURITY_NAME}
