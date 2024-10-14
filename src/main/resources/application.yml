@@ -6,7 +6,6 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: ${secrets.DB_USERNAME}
     password: ${secrets.PASSWORD}
-
   mail:
     host: smtp.gmail.com
     username: luisgunkim@gmail.com
@@ -14,16 +13,13 @@ spring:
     properties:
       mail.smtp.auth: true
       mail.smtp.starttls.enable: true
-
   redis:
     host: ${secrets.REDIS_HOST}
     port: ${secrets.REDIS_PORT}
-
   security:
     user:
       name: ${secrets.SECURITY_NAME}
       password: ${secrets.SECURITY_PASSWORD}
-
   jpa:
     database: mysql
     database-platform: org.hibernate.dialect.MySQL8Dialect
@@ -58,10 +54,8 @@ springdoc:
     enabled: true
     version: openapi_3_0
     path: /v3/api-docs
-
   default-consumes-media-type: application/json
   auto-tag-classes: true
-
   swagger-ui:
     operationsSorter: method
     path: /swagger-ui.html
