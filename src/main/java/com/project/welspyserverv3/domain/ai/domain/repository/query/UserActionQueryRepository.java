@@ -1,6 +1,7 @@
-package com.project.welspyserverv3.global.ai.domain.repository.query;
+package com.project.welspyserverv3.domain.ai.domain.repository.query;
 
-import com.project.welspyserverv3.global.ai.client.dto.DataResponse;
+import com.project.welspyserverv3.domain.ai.client.dto.DataResponse;
+import com.project.welspyserverv3.domain.ai.client.dto.RoomIdResponse;
 import com.querydsl.core.types.ConstructorExpression;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+import static com.project.welspyserverv3.domain.room.domain.entity.QRoomEntity.roomEntity;
 import static com.project.welspyserverv3.global.ai.domain.entity.QUserAction.userAction;
 
 @Repository
@@ -18,16 +20,18 @@ public class UserActionQueryRepository {
     private final JPAQueryFactory jpaQueryFactory;
 
     public List<DataResponse> getAllUserActions() {
-        List<DataResponse> results = jpaQueryFactory
-                .select(userActionConstructorExpression())
-                .from(userAction)
-                .orderBy(userAction.id.asc())
-                .fetch();
-        System.out.println("Fetched results: " + results);
         return jpaQueryFactory
                 .select(userActionConstructorExpression())
                 .from(userAction)
                 .orderBy(userAction.id.asc())
+                .fetch();
+    }
+
+    public List<RoomIdResponse> getAllRoomId() {
+        return jpaQueryFactory
+                .select(roomIdConstructorExpression())
+                .from(roomEntity)
+                .orderBy(roomEntity.roomId.asc())
                 .fetch();
     }
 
@@ -39,6 +43,12 @@ public class UserActionQueryRepository {
                 userAction.category,
                 userAction.startTime
         );
+    }
+
+    private ConstructorExpression<RoomIdResponse> roomIdConstructorExpression(){
+        return Projections.constructor(RoomIdResponse.class,
+                roomEntity.roomId
+                );
     }
 
 }
