@@ -7,7 +7,6 @@ import com.project.welspyserverv3.domain.auth.service.AuthService;
 import com.project.welspyserverv3.domain.auth.service.response.JsonWebTokenResponse;
 import com.project.welspyserverv3.domain.auth.service.response.RefreshTokenResponse;
 import com.project.welspyserverv3.domain.auth.service.response.SignUpResponse;
-import com.project.welspyserverv3.global.common.dto.response.BaseResponse;
 import com.project.welspyserverv3.global.common.dto.response.BaseResponseData;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -50,7 +49,7 @@ public class AuthController {
     public BaseResponseData<RefreshTokenResponse> refresh(RefreshTokenRequest request){
         return BaseResponseData.ok(
                 "재발급 성공",
-                authService.refresh(request.getRefreshToken()));
+                authService.refresh(request.refreshToken()));
     }
 
 }

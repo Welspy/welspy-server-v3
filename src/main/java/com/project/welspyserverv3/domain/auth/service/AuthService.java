@@ -6,7 +6,6 @@ import com.project.welspyserverv3.domain.auth.service.response.JsonWebTokenRespo
 import com.project.welspyserverv3.domain.auth.service.response.RefreshTokenResponse;
 import com.project.welspyserverv3.domain.auth.service.response.SignUpResponse;
 import com.project.welspyserverv3.domain.bank.service.BankService;
-import com.project.welspyserverv3.domain.user.client.dto.User;
 import com.project.welspyserverv3.domain.user.domain.entity.UserEntity;
 import com.project.welspyserverv3.domain.user.domain.enums.UserRole;
 import com.project.welspyserverv3.domain.user.domain.repository.jpa.UserJpaRepository;
@@ -32,33 +31,33 @@ public class AuthService {
     private final JwtProvider jwtProvider;
 
     public SignUpResponse signUp(SignUpRequest request) {
-        if (checkUserByEmail(request.getEmail())){
+        if (checkUserByEmail(request.email())){
             throw UserExistException.EXCEPTION;
         }
         userJpaRepository.save(UserEntity.builder()
-                .email(request.getEmail())
-                .name(request.getName())
-                .phoneNumber(request.getPhoneNumber())
-                .password(encoder.encode(request.getPassword()))
-                .imageUrl(request.getImageUrl())
+                .email(request.email())
+                .name(request.name())
+                .phoneNumber(request.phoneNumber())
+                .password(encoder.encode(request.password()))
+                .imageUrl(request.imageUrl())
                 .userRole(UserRole.USER)
                 .build()
         );
         return SignUpResponse.builder()
-                .accountNumber(bankService.createAccount(request.getEmail()))
+                .accountNumber(bankService.createAccount(request.email()))
                 .build();
     }
 
     public JsonWebTokenResponse signIn(SignInRequest request) {
-        if(!checkUserByEmail(request.getEmail())){
+        if(!checkUserByEmail(request.email())){
             throw UserNotFoundException.EXCEPTION;
         }
-        String userPassword = userJpaRepository.getByEmail(request.getEmail()).getPassword();
-        if (!encoder.matches(request.getPassword(), userPassword))
+        String userPassword = userJpaRepository.getByEmail(request.email()).getPassword();
+        if (!encoder.matches(request.password(), userPassword))
             throw PasswordWrongException.EXCEPTION;
         return JsonWebTokenResponse.builder()
-                .accessToken(jwtProvider.generateAccessToken(request.getEmail(), UserRole.USER))
-                .refreshToken(jwtProvider.generateRefreshToken(request.getEmail(), UserRole.USER))
+                .accessToken(jwtProvider.generateAccessToken(request.email(), UserRole.USER))
+                .refreshToken(jwtProvider.generateRefreshToken(request.email(), UserRole.USER))
                 .build();
     }
 
