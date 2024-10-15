@@ -10,8 +10,8 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+import static com.project.welspyserverv3.domain.ai.domain.entity.QUserAction.userAction;
 import static com.project.welspyserverv3.domain.room.domain.entity.QRoomEntity.roomEntity;
-import static com.project.welspyserverv3.global.ai.domain.entity.QUserAction.userAction;
 
 @Repository
 @RequiredArgsConstructor
