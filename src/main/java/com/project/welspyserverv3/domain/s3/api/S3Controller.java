@@ -6,6 +6,7 @@ import com.project.welspyserverv3.global.common.dto.response.BaseResponseData;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,7 +23,7 @@ public class S3Controller {
 
     private final S3Service s3Service;
 
-    @PostMapping
+    @PostMapping(consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "이미지 업로드")
     public BaseResponseData<String> s3Upload(@RequestPart(value = "image", required = false) MultipartFile image){
         String profileImage = s3Service.upload(image);
