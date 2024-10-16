@@ -23,7 +23,7 @@ public class S3Controller {
 
     private final S3Service s3Service;
 
-    @PostMapping(consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping
     @Operation(summary = "이미지 업로드")
     public BaseResponseData<String> s3Upload(@RequestPart(value = "image", required = false) MultipartFile image){
         String profileImage = s3Service.upload(image);
