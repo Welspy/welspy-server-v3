@@ -35,7 +35,7 @@ spring:
 application:
   jwt:
     secretKey: ${secrets.JWT_SECRET_KEY}
-    expiration: 43200000    # 12시간
+    expiration: 86400000    # 24시간
     refreshExpiration: 604800000   # 7일
 
 cloud:
