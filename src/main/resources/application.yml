@@ -60,3 +60,6 @@ springdoc:
   swagger-ui:
     operationsSorter: method
     path: /swagger-ui.html
+
+fast-api:
+  url: ${secrets.FAST_API_URL}
