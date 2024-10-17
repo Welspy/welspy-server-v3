@@ -1,4 +1,4 @@
-package com.project.welspyserverv3.domain.recommend.dto;
+package com.project.welspyserverv3.domain.recommend.client.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -13,8 +13,7 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class RoomIdList {
-
-    private List<Long> roomIdList;
-
+public class RoomIdsResponse {
+    private List<Long> roomIds;
 }
+

@@ -1,4 +1,4 @@
-package com.project.welspyserverv3.domain.recommend.dto;
+package com.project.welspyserverv3.domain.recommend.client.dto;
 
 import com.project.welspyserverv3.domain.room.domain.enums.Category;
 import com.project.welspyserverv3.domain.room.domain.enums.RoomType;
