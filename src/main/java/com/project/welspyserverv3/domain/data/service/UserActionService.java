@@ -1,8 +1,8 @@
-package com.project.welspyserverv3.domain.ai.service;
+package com.project.welspyserverv3.domain.data.service;
 
-import com.project.welspyserverv3.domain.ai.client.dto.DataResponse;
-import com.project.welspyserverv3.domain.ai.client.dto.RoomIdResponse;
-import com.project.welspyserverv3.domain.ai.domain.repository.query.UserActionQueryRepository;
+import com.project.welspyserverv3.domain.data.client.dto.DataResponse;
+import com.project.welspyserverv3.domain.data.client.dto.RoomIdResponse;
+import com.project.welspyserverv3.domain.data.domain.repository.query.UserActionQueryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

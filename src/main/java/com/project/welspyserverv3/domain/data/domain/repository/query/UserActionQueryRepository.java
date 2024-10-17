@@ -1,7 +1,7 @@
-package com.project.welspyserverv3.domain.ai.domain.repository.query;
+package com.project.welspyserverv3.domain.data.domain.repository.query;
 
-import com.project.welspyserverv3.domain.ai.client.dto.DataResponse;
-import com.project.welspyserverv3.domain.ai.client.dto.RoomIdResponse;
+import com.project.welspyserverv3.domain.data.client.dto.DataResponse;
+import com.project.welspyserverv3.domain.data.client.dto.RoomIdResponse;
 import com.querydsl.core.types.ConstructorExpression;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-import static com.project.welspyserverv3.domain.ai.domain.entity.QUserAction.userAction;
+import static com.project.welspyserverv3.domain.data.domain.entity.QUserAction.userAction;
 import static com.project.welspyserverv3.domain.room.domain.entity.QRoomEntity.roomEntity;
 
 @Repository

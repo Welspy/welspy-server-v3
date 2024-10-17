@@ -1,4 +1,4 @@
-package com.project.welspyserverv3.domain.ai.client.dto;
+package com.project.welspyserverv3.domain.data.client.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

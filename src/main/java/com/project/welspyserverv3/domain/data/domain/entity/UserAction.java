@@ -1,4 +1,4 @@
-package com.project.welspyserverv3.domain.ai.domain.entity;
+package com.project.welspyserverv3.domain.data.domain.entity;
 
 import com.project.welspyserverv3.domain.room.domain.enums.Category;
 import jakarta.persistence.Column;

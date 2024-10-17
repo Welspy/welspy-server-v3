@@ -1,4 +1,4 @@
-package com.project.welspyserverv3.domain.ai.client.dto;
+package com.project.welspyserverv3.domain.data.client.dto;
 
 import com.project.welspyserverv3.domain.room.domain.enums.Category;
 import lombok.AllArgsConstructor;
