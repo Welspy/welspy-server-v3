@@ -40,4 +40,6 @@ public class ProductEntity {
     @Column(nullable = false)
     private String imageUrl;
 
+    private String productUrl;
+
 }

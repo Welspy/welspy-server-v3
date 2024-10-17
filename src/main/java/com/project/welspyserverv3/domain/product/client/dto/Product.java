@@ -24,6 +24,7 @@ public class Product {
     private Long discount;
     private Long discountedPrice;
     private String imageUrl;
+    private String productUrl;
 
     public Product toProduct(ProductEntity productEntity) {
         return Product.builder()
@@ -34,6 +35,7 @@ public class Product {
                 .discount(productEntity.getDiscount())
                 .discountedPrice(productEntity.getDiscountedPrice())
                 .imageUrl(productEntity.getImageUrl())
+                .productUrl(productEntity.getProductUrl())
                 .build();
     }
 

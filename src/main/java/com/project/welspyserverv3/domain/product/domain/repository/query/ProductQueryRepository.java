@@ -48,7 +48,8 @@ public class ProductQueryRepository {
                 productEntity.price,
                 productEntity.discount,
                 productEntity.discountedPrice,
-                productEntity.imageUrl
+                productEntity.imageUrl,
+                productEntity.productUrl
         );
     }
 
