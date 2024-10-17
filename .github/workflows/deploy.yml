@@ -31,6 +31,7 @@ jobs:
         spring.security.user.password: ${{ secrets.SECURITY_PASSWORD }}
         cloud.aws.credentials.accessKey: ${{ secrets.S3_ACCESS_KEY }}
         cloud.aws.credentials.secretKey: ${{ secrets.S3_SECRET_KEY }}
+        fast-api.url: ${{ secrets.FAST_API_URL }}
 
     - name: set chmod
       run: chmod +x ./gradlew
