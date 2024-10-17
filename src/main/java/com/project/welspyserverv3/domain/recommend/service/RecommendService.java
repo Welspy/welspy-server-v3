@@ -4,6 +4,7 @@ import com.project.welspyserverv3.domain.recommend.client.dto.RoomIdsResponse;
 import com.project.welspyserverv3.global.common.dto.request.PageRequest;
 import com.project.welspyserverv3.global.common.repository.UserSecurity;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -19,7 +20,8 @@ public class RecommendService {
     private final RestTemplate restTemplate;
     private final UserSecurity userSecurity;
 
-    private static final String URL="http://34.64.219.190:8000";
+    @Value("${fast-api.url}")
+    private String url;
 
 //    public ResponseEntity<List<RecommendList>> recommendList(){
 //
@@ -27,7 +29,7 @@ public class RecommendService {
 
     public List<Long> getRoomIdList(PageRequest request) {
         URI uri = UriComponentsBuilder
-                .fromUriString(URL)
+                .fromUriString(url)
                 .path("/recommendations")
                 .queryParam(
                         "user_email", userSecurity.getUser().getEmail(),
@@ -51,6 +53,5 @@ public class RecommendService {
         System.out.println(roomIds.toString());
         return roomIds;
     }
-
 
 }
