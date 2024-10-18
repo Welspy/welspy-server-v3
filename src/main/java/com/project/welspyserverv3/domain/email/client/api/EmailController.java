@@ -23,14 +23,14 @@ public class EmailController {
     @PostMapping("/send")
     @Operation(summary = "이메일 전송")
     public BaseResponse sendEmail(@RequestBody EmailSendRequest request) {
-        emailService.joinEmail(request.getEmail());
+        emailService.joinEmail(request.email());
         return BaseResponse.ok("이메일 전송 성공");
     }
 
     @PostMapping("/check")
     @Operation(summary = "이메일 인증")
     public BaseResponse checkEmail(@RequestBody EmailCheckRequest request) {
-        return emailService.checkAuthNum(request.getEmail(),request.getAuthNum());
+        return emailService.checkAuthNum(request.email(),request.authNum());
     }
 
 }
