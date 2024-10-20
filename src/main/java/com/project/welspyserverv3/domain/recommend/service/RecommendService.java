@@ -45,8 +45,7 @@ public class RecommendService {
 
         // 응답 확인 후 처리
         if (responseEntity.getBody() == null || responseEntity.getBody().getRoomIds() == null) {
-            System.out.println("널인데용");
-            throw new NullPointerException("널");
+            throw new NullPointerException("응답값을 찾을 수 없습니다.");
         }
 
         List<Long> roomIds = responseEntity.getBody().getRoomIds();
