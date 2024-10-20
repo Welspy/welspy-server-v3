@@ -20,11 +20,4 @@ public class RecommendController {
 
     private final RecommendService recommendService;
 
-    @GetMapping
-    public BaseResponseData<List<Long>> roomIdList(@ModelAttribute PageRequest request) {
-        return BaseResponseData.ok(
-                "조회 성공",
-                recommendService.getRoomIdList(request));
-    }
-
 }
