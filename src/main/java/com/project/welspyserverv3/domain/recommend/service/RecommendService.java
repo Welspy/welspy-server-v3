@@ -1,6 +1,9 @@
 package com.project.welspyserverv3.domain.recommend.service;
 
 import com.project.welspyserverv3.domain.recommend.client.dto.RoomIdsResponse;
+import com.project.welspyserverv3.domain.room.client.dto.Room;
+import com.project.welspyserverv3.domain.room.domain.entity.RoomEntity;
+import com.project.welspyserverv3.domain.room.domain.repository.jpa.RoomJpaRepository;
 import com.project.welspyserverv3.global.common.dto.request.PageRequest;
 import com.project.welspyserverv3.global.common.repository.UserSecurity;
 import lombok.RequiredArgsConstructor;
@@ -19,13 +22,18 @@ public class RecommendService {
 
     private final RestTemplate restTemplate;
     private final UserSecurity userSecurity;
+    private final RoomJpaRepository roomJpaRepository;
 
     @Value("${fast-api.url}")
     private String url;
 
-//    public ResponseEntity<List<RecommendList>> recommendList(){
-//
-//    }
+    public List<Room> recommendList(PageRequest request) {
+        List<Long> roomIds = getRoomIdList(request);
+        List<RoomEntity> roomEntities = roomJpaRepository.findRoomEntitiesByRoomIdIn(roomIds);
+        return roomEntities.stream()
+                .map(Room::new)
+                .toList();
+    }
 
     public List<Long> getRoomIdList(PageRequest request) {
         URI uri = UriComponentsBuilder
