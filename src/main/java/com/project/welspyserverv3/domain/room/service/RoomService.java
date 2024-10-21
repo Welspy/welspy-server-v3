@@ -86,6 +86,7 @@ public class RoomService {
 
     public void deleteRoom(Long roomId){
         roomJpaRepository.deleteByRoomId(roomId);
+        memberListJpaRepository.deleteByRoomIdAndEmail(roomId, userSecurity.getUser().getEmail());
     }
 
     public void saveMemberList(MemberList memberList){
