@@ -45,7 +45,6 @@ public class Room {
         this.productId = productId;
     }
 
-
     public Room(RoomEntity roomEntity) {
         this.roomId = roomEntity.getRoomId();
         this.title = roomEntity.getTitle();
