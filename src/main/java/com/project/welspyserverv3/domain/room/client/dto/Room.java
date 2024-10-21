@@ -33,6 +33,19 @@ public class Room {
     private RoomType roomType;
     private Long productId;
 
+    public Room(Long roomId, String title, String description, Long goalMoney, Integer memberLimit, String imageUrl, Category category, RoomType roomType, Long productId) {
+        this.roomId = roomId;
+        this.title = title;
+        this.description = description;
+        this.goalMoney = goalMoney;
+        this.memberLimit = memberLimit;
+        this.imageUrl = imageUrl;
+        this.category = category;
+        this.roomType = roomType;
+        this.productId = productId;
+    }
+
+
     public Room(RoomEntity roomEntity) {
         this.roomId = roomEntity.getRoomId();
         this.title = roomEntity.getTitle();
