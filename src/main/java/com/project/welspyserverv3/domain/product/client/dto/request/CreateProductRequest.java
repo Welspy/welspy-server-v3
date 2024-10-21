@@ -12,5 +12,6 @@ public class CreateProductRequest {
     private Long price;
     private Long discount;
     private String imageUrl;
+    private String productUrl;
 
 }

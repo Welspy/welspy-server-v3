@@ -24,6 +24,7 @@ public class ProductService {
                 .discount(request.getDiscount())
                 .discountedPrice(price - (price * request.getDiscount() / 100))
                 .imageUrl(request.getImageUrl())
+                .productUrl(request.getProductUrl())
                 .build()
         );
     }
