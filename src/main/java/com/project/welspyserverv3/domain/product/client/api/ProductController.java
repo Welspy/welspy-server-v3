@@ -10,6 +10,8 @@ import com.project.welspyserverv3.global.common.dto.response.BaseResponse;
 import com.project.welspyserverv3.global.common.dto.response.BaseResponseData;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -36,14 +38,18 @@ public class ProductController {
     @PostMapping
     @Operation(summary = "제품 등록")
     @ResponseStatus(HttpStatus.CREATED)
-    public BaseResponse createProduct(@RequestBody CreateProductRequest request) {
+    public BaseResponse createProduct(@RequestBody CreateProductRequest request,
+                                      HttpServletRequest http) {
+        System.out.println(http.getRemoteAddr());
         productService.createProduct(request);
         return BaseResponse.created("등록 성공");
     }
 
     @GetMapping
     @Operation(summary = "제품 조회")
-    public BaseResponseData<Product> getProduct(@RequestParam Long idx){
+    public BaseResponseData<Product> getProduct(@RequestParam Long idx,
+                                                HttpServletRequest http){
+        System.out.println(http.getRemoteAddr());
         return BaseResponseData.ok(
                 "조회 성공",
                 productService.getProduct(idx));
@@ -51,7 +57,9 @@ public class ProductController {
 
     @GetMapping("/list")
     @Operation(summary = "제품 목록")
-    public BaseResponseData<List<Product>> productList(@ModelAttribute PageRequest request) {
+    public BaseResponseData<List<Product>> productList(@ModelAttribute PageRequest request,
+                                                       HttpServletRequest http) {
+        System.out.println(http.getRemoteAddr());
         return BaseResponseData.ok(
                 "목록 출력 성공",
                 productQueryService.productList(request));
@@ -59,7 +67,9 @@ public class ProductController {
 
     @GetMapping("/search")
     @Operation(summary = "제품 검색")
-    public BaseResponseData<List<Product>> productListSearch(@ModelAttribute ProductSearchRequest request) {
+    public BaseResponseData<List<Product>> productListSearch(@ModelAttribute ProductSearchRequest request,
+                                                             HttpServletRequest http) {
+        System.out.println(http.getRemoteAddr());
         return BaseResponseData.ok(
                 "목록 출력 성공",
                 productQueryService.productSearch(request));
