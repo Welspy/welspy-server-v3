@@ -63,6 +63,9 @@ public class BankService {
                 .map(memberListMapper::toMemberList)
                 .orElseThrow(()->UserNotFoundException.EXCEPTION);
         Long nowBalance = memberList.getBalance();
+        if (memberList.getGoalMoney() < request.getMoney()){
+            throw BankErrorException.EXCEPTION;
+        }
         memberList.setBalance(nowBalance + request.getMoney());
         memberListJpaRepository.save(MemberListEntity.builder()
                 .idx(memberList.getIdx())
