@@ -14,6 +14,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import org.apache.coyote.BadRequestException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -39,7 +40,7 @@ public class ProductController {
     @Operation(summary = "제품 등록")
     @ResponseStatus(HttpStatus.CREATED)
     public BaseResponse createProduct(@RequestBody CreateProductRequest request,
-                                      HttpServletRequest http) {
+                                      HttpServletRequest http) throws BadRequestException {
         System.out.println("/product POST "+http.getRemoteAddr());
         productService.createProduct(request);
         return BaseResponse.created("등록 성공");
