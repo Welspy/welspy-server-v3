@@ -44,7 +44,8 @@ public class BankLogQueryRepository {
                 bankLogEntity.idx,
                 bankLogEntity.accountNumber,
                 bankLogEntity.money,
-                bankLogEntity.bankType
+                bankLogEntity.bankType,
+                bankLogEntity.logDateTime
         );
     }
 

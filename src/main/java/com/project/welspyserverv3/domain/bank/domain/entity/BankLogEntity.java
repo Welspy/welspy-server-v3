@@ -13,6 +13,9 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
+import org.springframework.data.annotation.CreatedDate;
+
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -34,5 +37,8 @@ public class BankLogEntity {
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private BankType bankType;
+
+    @CreatedDate
+    private LocalDateTime logDateTime;
 
 }
