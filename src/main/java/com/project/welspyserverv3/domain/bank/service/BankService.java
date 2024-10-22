@@ -48,7 +48,14 @@ public class BankService {
 
     public Long savingMoney(SaveMoneyRequest request){
         Bank bank = getBankByEmail();
+        MemberList memberList = memberListJpaRepository
+                .findByEmailAndRoomId(userSecurity.getUser().getEmail(), request.getRoomId())
+                .map(memberListMapper::toMemberList)
+                .orElseThrow(()->UserNotFoundException.EXCEPTION);
         if (bank.getBalance() - request.getMoney() < 0){
+            throw BankErrorException.EXCEPTION;
+        }
+        if (memberList.getGoalMoney() < request.getMoney()){
             throw BankErrorException.EXCEPTION;
         }
         bank.setBalance(bank.getBalance() - request.getMoney());
@@ -58,14 +65,7 @@ public class BankService {
                 .money(request.getMoney())
                 .bankType(BankType.SEND)
                 .build());
-        MemberList memberList = memberListJpaRepository
-                .findByEmailAndRoomId(userSecurity.getUser().getEmail(), request.getRoomId())
-                .map(memberListMapper::toMemberList)
-                .orElseThrow(()->UserNotFoundException.EXCEPTION);
         Long nowBalance = memberList.getBalance();
-        if (memberList.getGoalMoney() < request.getMoney()){
-            throw BankErrorException.EXCEPTION;
-        }
         memberList.setBalance(nowBalance + request.getMoney());
         memberListJpaRepository.save(MemberListEntity.builder()
                 .idx(memberList.getIdx())
