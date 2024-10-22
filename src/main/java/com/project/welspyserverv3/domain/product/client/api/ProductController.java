@@ -40,7 +40,7 @@ public class ProductController {
     @ResponseStatus(HttpStatus.CREATED)
     public BaseResponse createProduct(@RequestBody CreateProductRequest request,
                                       HttpServletRequest http) {
-        System.out.println(http.getRemoteAddr());
+        System.out.println("/product POST "+http.getRemoteAddr());
         productService.createProduct(request);
         return BaseResponse.created("등록 성공");
     }
@@ -49,7 +49,7 @@ public class ProductController {
     @Operation(summary = "제품 조회")
     public BaseResponseData<Product> getProduct(@RequestParam Long idx,
                                                 HttpServletRequest http){
-        System.out.println(http.getRemoteAddr());
+        System.out.println("/product GET "+http.getRemoteAddr());
         return BaseResponseData.ok(
                 "조회 성공",
                 productService.getProduct(idx));
@@ -59,7 +59,7 @@ public class ProductController {
     @Operation(summary = "제품 목록")
     public BaseResponseData<List<Product>> productList(@ModelAttribute PageRequest request,
                                                        HttpServletRequest http) {
-        System.out.println(http.getRemoteAddr());
+        System.out.println("/product/list "+http.getRemoteAddr());
         return BaseResponseData.ok(
                 "목록 출력 성공",
                 productQueryService.productList(request));
@@ -69,7 +69,7 @@ public class ProductController {
     @Operation(summary = "제품 검색")
     public BaseResponseData<List<Product>> productListSearch(@ModelAttribute ProductSearchRequest request,
                                                              HttpServletRequest http) {
-        System.out.println(http.getRemoteAddr());
+        System.out.println("/product/search "+http.getRemoteAddr());
         return BaseResponseData.ok(
                 "목록 출력 성공",
                 productQueryService.productSearch(request));

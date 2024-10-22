@@ -31,8 +31,9 @@ public class AuthController {
     @PostMapping("/sign-up")
     @Operation(summary = "회원가입")
     @ResponseStatus(HttpStatus.CREATED)
-    public BaseResponseData<SignUpResponse> signUp(@Validated @RequestBody SignUpRequest request, HttpServletRequest http){
-        System.out.println(http.getRemoteAddr());
+    public BaseResponseData<SignUpResponse> signUp(@Validated @RequestBody SignUpRequest request,
+                                                   HttpServletRequest http){
+        System.out.println("/auth/sign-up " + http.getRemoteAddr());
         return BaseResponseData.created(
                 "회원가입 성공",
                 authService.signUp(request));
@@ -40,8 +41,9 @@ public class AuthController {
 
     @PostMapping("/sign-in")
     @Operation(summary = "로그인")
-    public BaseResponseData<JsonWebTokenResponse> signIn(@Validated @RequestBody SignInRequest request, HttpServletRequest http){
-        System.out.println(http.getRemoteAddr());
+    public BaseResponseData<JsonWebTokenResponse> signIn(@Validated @RequestBody SignInRequest request,
+                                                         HttpServletRequest http){
+        System.out.println("/auth/sign-in " + http.getRemoteAddr());
         return BaseResponseData.ok(
                 "로그인 성공",
                 authService.signIn(request));
@@ -49,8 +51,9 @@ public class AuthController {
 
     @PostMapping("/refresh")
     @Operation(summary = "토큰 재발급")
-    public BaseResponseData<RefreshTokenResponse> refresh(RefreshTokenRequest request, HttpServletRequest http){
-        System.out.println(http.getRemoteAddr());
+    public BaseResponseData<RefreshTokenResponse> refresh(RefreshTokenRequest request,
+                                                          HttpServletRequest http){
+        System.out.println("/auth/refresh " + http.getRemoteAddr());
         return BaseResponseData.ok(
                 "재발급 성공",
                 authService.refresh(request.refreshToken()));
