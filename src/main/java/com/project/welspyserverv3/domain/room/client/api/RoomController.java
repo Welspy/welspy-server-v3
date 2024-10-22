@@ -14,6 +14,7 @@ import com.project.welspyserverv3.global.common.dto.response.BaseResponse;
 import com.project.welspyserverv3.global.common.dto.response.BaseResponseData;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -40,22 +41,28 @@ public class RoomController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     @Operation(summary = "챌린지 방 생성")
-    public BaseResponse createRoom(@RequestBody RoomCreateRequest request) {
+    public BaseResponse createRoom(@RequestBody RoomCreateRequest request,
+                                   HttpServletRequest http) {
         roomService.createRoom(request);
+        System.out.println(http.getRequestURI()+" - "+http.getRemoteAddr());
         return BaseResponse.created("방 생성 성공");
     }
 
     @PostMapping("/join")
     @ResponseStatus(HttpStatus.CREATED)
     @Operation(summary = "챌린지 가입")
-    public BaseResponse joinRoom(@RequestBody RoomJoinRequest request) {
+    public BaseResponse joinRoom(@RequestBody RoomJoinRequest request,
+                                 HttpServletRequest http) {
         roomService.joinRoom(request);
+        System.out.println(http.getRequestURI()+" - "+http.getRemoteAddr());
         return BaseResponse.created("방 가입 성공");
     }
 
     @GetMapping
     @Operation(summary = "챌린지 단일 조회", description = "roomId를 기준으로 챌린지를 단일 조회합니다.")
-    public BaseResponseData<Room> getRoom(@RequestParam Long roomId) {
+    public BaseResponseData<Room> getRoom(@RequestParam Long roomId,
+                                          HttpServletRequest http) {
+        System.out.println(http.getRequestURI()+" - "+http.getRemoteAddr());
         return BaseResponseData.ok(
                 "조회 성공",
                 roomService.getRoomById(roomId));
@@ -63,7 +70,9 @@ public class RoomController {
 
     @GetMapping("/list")
     @Operation(summary = "챌린지 목록 출력")
-    public BaseResponseData<List<Room>> roomList(@ModelAttribute PageRequest request) {
+    public BaseResponseData<List<Room>> roomList(@ModelAttribute PageRequest request,
+                                                 HttpServletRequest http) {
+        System.out.println(http.getRequestURI()+" - "+http.getRemoteAddr());
         return BaseResponseData.ok(
                 "목록 출럭 성공",
                 roomQueryService.roomList(request));
@@ -71,7 +80,9 @@ public class RoomController {
 
     @GetMapping("/search")
     @Operation(summary = "챌린지 검색", description = "제목을 기준으로 해당 제목이 포함된 챌린지를 검색합니다.")
-    public BaseResponseData<List<Room>> roomSearch(@ModelAttribute RoomSearchRequest request) {
+    public BaseResponseData<List<Room>> roomSearch(@ModelAttribute RoomSearchRequest request,
+                                                   HttpServletRequest http) {
+        System.out.println(http.getRequestURI()+" - "+http.getRemoteAddr());
         return BaseResponseData.ok(
                 "검색 성공",
                 roomQueryService.roomSearch(request));
@@ -79,7 +90,9 @@ public class RoomController {
 
     @GetMapping("/private")
     @Operation(summary = "비공개 챌리지 목록", description = "(불편해? 자세를 고쳐앉아~)")
-    public BaseResponseData<List<Room>> privateRoomList(@ModelAttribute PageRequest request) {
+    public BaseResponseData<List<Room>> privateRoomList(@ModelAttribute PageRequest request,
+                                                        HttpServletRequest http) {
+        System.out.println(http.getRequestURI()+" - "+http.getRemoteAddr());
         return BaseResponseData.ok(
                 "목록 출력 성공",
                 roomQueryService.privateRoom(request));
@@ -87,7 +100,9 @@ public class RoomController {
 
     @GetMapping("/public")
     @Operation(summary = "공개 챌린지 목록")
-    public BaseResponseData<List<Room>> publicRoomList(@ModelAttribute PageRequest request) {
+    public BaseResponseData<List<Room>> publicRoomList(@ModelAttribute PageRequest request,
+                                                       HttpServletRequest http) {
+        System.out.println(http.getRequestURI()+" - "+http.getRemoteAddr());
         return BaseResponseData.ok(
                 "목록 출력 성공",
                 roomQueryService.publicRoom(request));
@@ -95,7 +110,9 @@ public class RoomController {
 
     @GetMapping("/my-room")
     @Operation(summary = "내 챌린지 목록", description = "현재 로그인한 유저가 들어간 챌린지 명단을 출력합니다.")
-    public BaseResponseData<List<MemberList>> myRoomList(@ModelAttribute PageRequest request) {
+    public BaseResponseData<List<MemberList>> myRoomList(@ModelAttribute PageRequest request,
+                                                         HttpServletRequest http) {
+        System.out.println(http.getRequestURI()+" - "+http.getRemoteAddr());
         return BaseResponseData.ok(
                 "목록 출력 성공",
                 roomQueryService.myRoomList(request));
@@ -103,7 +120,9 @@ public class RoomController {
 
     @GetMapping("/member")
     @Operation(summary = "방에 가입한 명단 출력")
-    public BaseResponseData<List<RoomMemberListResponse>> memberList(@ModelAttribute RoomMemberListRequest request) {
+    public BaseResponseData<List<RoomMemberListResponse>> memberList(@ModelAttribute RoomMemberListRequest request,
+                                                                     HttpServletRequest http) {
+        System.out.println(http.getRequestURI()+" - "+http.getRemoteAddr());
         return BaseResponseData.ok(
                 "명단 출력 성공",
                 roomQueryService.roomMemberList(request));
@@ -111,14 +130,18 @@ public class RoomController {
 
     @DeleteMapping("/exit")
     @Operation(summary = "방 탈퇴")
-    public BaseResponse exitRoom(@RequestParam Long roomId) {
+    public BaseResponse exitRoom(@RequestParam Long roomId,
+                                 HttpServletRequest http) {
+        System.out.println(http.getRequestURI()+" - "+http.getRemoteAddr());
         roomService.exitRoom(roomId);
         return BaseResponse.ok("방 탈퇴 성공");
     }
 
     @DeleteMapping
     @Operation(summary = "방 삭제")
-    public BaseResponse deleteRoom(@RequestParam Long roomId) {
+    public BaseResponse deleteRoom(@RequestParam Long roomId,
+                                   HttpServletRequest http) {
+        System.out.println(http.getRequestURI()+" - "+http.getRemoteAddr());
         roomService.deleteRoom(roomId);
         return BaseResponse.ok("방 삭제 성공");
     }

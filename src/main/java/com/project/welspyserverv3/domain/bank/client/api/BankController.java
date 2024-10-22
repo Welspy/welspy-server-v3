@@ -1,6 +1,5 @@
 package com.project.welspyserverv3.domain.bank.client.api;
 
-import com.project.welspyserverv3.domain.bank.client.dto.Bank;
 import com.project.welspyserverv3.domain.bank.client.dto.BankLog;
 import com.project.welspyserverv3.domain.bank.client.dto.request.ChargeMoneyRequest;
 import com.project.welspyserverv3.domain.bank.client.dto.request.SaveMoneyRequest;
@@ -11,6 +10,7 @@ import com.project.welspyserverv3.global.common.dto.request.PageRequest;
 import com.project.welspyserverv3.global.common.dto.response.BaseResponseData;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,7 +32,8 @@ public class BankController {
 
     @GetMapping
     @Operation(summary = "내 뱅킹 정보 조회")
-    public BaseResponseData<MyBankResponse> myBank(){
+    public BaseResponseData<MyBankResponse> myBank(HttpServletRequest http){
+        System.out.println(http.getRequestURI()+" - "+http.getRemoteAddr());
         return BaseResponseData.ok(
                 "조회 성공",
                 bankService.myBank());
@@ -40,7 +41,9 @@ public class BankController {
 
     @GetMapping("/log-all")
     @Operation(summary = "모든 로그 기록 보기")
-    public BaseResponseData<List<BankLog>> getAllLog(PageRequest request){
+    public BaseResponseData<List<BankLog>> getAllLog(PageRequest request,
+                                                     HttpServletRequest http){
+        System.out.println(http.getRequestURI()+" - "+http.getRemoteAddr());
         return BaseResponseData.ok(
                 "조회 성공",
                 bankQueryService.getAllLog(request));
@@ -48,7 +51,9 @@ public class BankController {
 
     @GetMapping("/log-my")
     @Operation(summary = "내 로그 기록 보기")
-    public BaseResponseData<List<BankLog>> getMyLog(PageRequest request){
+    public BaseResponseData<List<BankLog>> getMyLog(PageRequest request,
+                                                    HttpServletRequest http){
+        System.out.println(http.getRequestURI()+" - "+http.getRemoteAddr());
         return BaseResponseData.ok(
                 "조회 성공",
                 bankQueryService.getMyLog(request));
@@ -56,7 +61,9 @@ public class BankController {
 
     @PatchMapping
     @Operation(summary = "저금하기")
-    public BaseResponseData<Long> savingMoney(@RequestBody @Valid SaveMoneyRequest request){
+    public BaseResponseData<Long> savingMoney(@RequestBody @Valid SaveMoneyRequest request,
+                                              HttpServletRequest http){
+        System.out.println(http.getRequestURI()+" - "+http.getRemoteAddr());
         return BaseResponseData.ok(
                 "저금 성공",
                 bankService.savingMoney(request));
@@ -64,7 +71,9 @@ public class BankController {
 
     @PatchMapping("/charge")
     @Operation(summary = "충전")
-    public BaseResponseData<Long> chargeMoney(@RequestBody @Valid ChargeMoneyRequest request){
+    public BaseResponseData<Long> chargeMoney(@RequestBody @Valid ChargeMoneyRequest request,
+                                              HttpServletRequest http){
+        System.out.println(http.getRequestURI()+" - "+http.getRemoteAddr());
         return BaseResponseData.ok(
                 "저금 성공",
                 bankService.chargeMoney(request));
