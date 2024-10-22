@@ -33,7 +33,7 @@ public class AuthController {
     @ResponseStatus(HttpStatus.CREATED)
     public BaseResponseData<SignUpResponse> signUp(@Validated @RequestBody SignUpRequest request,
                                                    HttpServletRequest http){
-        System.out.println(http.getRequestURI()+" - "+http.getRemoteAddr());
+        System.out.println(http.getRequestURI()+" "+ http.getMethod() +" - "+http.getRemoteAddr());
         return BaseResponseData.created(
                 "회원가입 성공",
                 authService.signUp(request));
@@ -43,7 +43,7 @@ public class AuthController {
     @Operation(summary = "로그인")
     public BaseResponseData<JsonWebTokenResponse> signIn(@Validated @RequestBody SignInRequest request,
                                                          HttpServletRequest http){
-        System.out.println(http.getRequestURI()+" - "+http.getRemoteAddr());
+        System.out.println(http.getRequestURI()+" "+ http.getMethod() +" - "+http.getRemoteAddr());
         return BaseResponseData.ok(
                 "로그인 성공",
                 authService.signIn(request));
@@ -53,7 +53,7 @@ public class AuthController {
     @Operation(summary = "토큰 재발급")
     public BaseResponseData<RefreshTokenResponse> refresh(RefreshTokenRequest request,
                                                           HttpServletRequest http){
-        System.out.println(http.getRequestURI()+" - "+http.getRemoteAddr());
+        System.out.println(http.getRequestURI()+" "+ http.getMethod() +" - "+http.getRemoteAddr());
         return BaseResponseData.ok(
                 "재발급 성공",
                 authService.refresh(request.refreshToken()));

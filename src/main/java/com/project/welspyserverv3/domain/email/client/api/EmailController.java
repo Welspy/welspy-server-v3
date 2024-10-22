@@ -24,7 +24,7 @@ public class EmailController {
     @PostMapping("/send")
     @Operation(summary = "이메일 전송")
     public BaseResponse sendEmail(@RequestBody EmailSendRequest request, HttpServletRequest http) {
-        System.out.println(http.getRequestURI()+" - "+http.getRemoteAddr());
+        System.out.println(http.getRequestURI()+" "+ http.getMethod() +" - "+http.getRemoteAddr());
         emailService.joinEmail(request.email());
         return BaseResponse.ok("이메일 전송 성공");
     }
@@ -32,7 +32,7 @@ public class EmailController {
     @PostMapping("/check")
     @Operation(summary = "이메일 인증")
     public BaseResponse checkEmail(@RequestBody EmailCheckRequest request, HttpServletRequest http) {
-        System.out.println(http.getRequestURI()+" - "+http.getRemoteAddr());
+        System.out.println(http.getRequestURI()+" "+ http.getMethod() +" - "+http.getRemoteAddr());
         return emailService.checkAuthNum(request.email(),request.authNum());
     }
 

@@ -26,7 +26,7 @@ public class RecommendController {
     @GetMapping
     @Operation(summary = "추천 리스트", description = "이메일을 기준으로 사용자에게 추천 데이터를 반환합니다.")
     public BaseResponseData<List<Room>> roomList(@ModelAttribute PageRequest request, HttpServletRequest http) {
-        System.out.println(http.getRequestURI()+" - "+http.getRemoteAddr());
+        System.out.println(http.getRequestURI()+" "+ http.getMethod() +" - "+http.getRemoteAddr());
         return BaseResponseData.ok(
                 "조회 성공",
                 recommendService.recommendList(request));

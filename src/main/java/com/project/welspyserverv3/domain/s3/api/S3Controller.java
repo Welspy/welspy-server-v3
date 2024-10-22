@@ -28,7 +28,7 @@ public class S3Controller {
     @Operation(summary = "이미지 업로드")
     public BaseResponseData<String> s3Upload(@RequestPart(value = "image", required = false) MultipartFile image,
                                              HttpServletRequest http) {
-        System.out.println(http.getRequestURI()+" - "+http.getRemoteAddr());
+        System.out.println(http.getRequestURI()+" "+ http.getMethod() +" - "+http.getRemoteAddr());
         String profileImage = s3Service.upload(image);
         return BaseResponseData.ok(
                 "이미지 업로드 성공",
@@ -39,7 +39,7 @@ public class S3Controller {
     @Operation(summary = "이미지 삭제")
     public BaseResponse s3Delete(@RequestParam String imageUrl,
                                  HttpServletRequest http) {
-        System.out.println(http.getRequestURI()+" - "+http.getRemoteAddr());
+        System.out.println(http.getRequestURI()+" "+ http.getMethod() +" - "+http.getRemoteAddr());
         s3Service.deleteImageFromS3(imageUrl);
         return BaseResponse.ok("이미지 삭제 성공");
     }

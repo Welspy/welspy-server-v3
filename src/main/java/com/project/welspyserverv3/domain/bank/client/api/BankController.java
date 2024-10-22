@@ -33,7 +33,7 @@ public class BankController {
     @GetMapping
     @Operation(summary = "내 뱅킹 정보 조회")
     public BaseResponseData<MyBankResponse> myBank(HttpServletRequest http){
-        System.out.println(http.getRequestURI()+" - "+http.getRemoteAddr());
+        System.out.println(http.getRequestURI()+" "+ http.getMethod() +" - "+http.getRemoteAddr());
         return BaseResponseData.ok(
                 "조회 성공",
                 bankService.myBank());
@@ -43,7 +43,7 @@ public class BankController {
     @Operation(summary = "모든 로그 기록 보기")
     public BaseResponseData<List<BankLog>> getAllLog(PageRequest request,
                                                      HttpServletRequest http){
-        System.out.println(http.getRequestURI()+" - "+http.getRemoteAddr());
+        System.out.println(http.getRequestURI()+" "+ http.getMethod() +" - "+http.getRemoteAddr());
         return BaseResponseData.ok(
                 "조회 성공",
                 bankQueryService.getAllLog(request));
@@ -53,7 +53,7 @@ public class BankController {
     @Operation(summary = "내 로그 기록 보기")
     public BaseResponseData<List<BankLog>> getMyLog(PageRequest request,
                                                     HttpServletRequest http){
-        System.out.println(http.getRequestURI()+" - "+http.getRemoteAddr());
+        System.out.println(http.getRequestURI()+" "+ http.getMethod() +" - "+http.getRemoteAddr());
         return BaseResponseData.ok(
                 "조회 성공",
                 bankQueryService.getMyLog(request));
@@ -63,7 +63,7 @@ public class BankController {
     @Operation(summary = "저금하기")
     public BaseResponseData<Long> savingMoney(@RequestBody @Valid SaveMoneyRequest request,
                                               HttpServletRequest http){
-        System.out.println(http.getRequestURI()+" - "+http.getRemoteAddr());
+        System.out.println(http.getRequestURI()+" "+ http.getMethod() +" - "+http.getRemoteAddr());
         return BaseResponseData.ok(
                 "저금 성공",
                 bankService.savingMoney(request));
@@ -73,7 +73,7 @@ public class BankController {
     @Operation(summary = "충전")
     public BaseResponseData<Long> chargeMoney(@RequestBody @Valid ChargeMoneyRequest request,
                                               HttpServletRequest http){
-        System.out.println(http.getRequestURI()+" - "+http.getRemoteAddr());
+        System.out.println(http.getRequestURI()+" "+ http.getMethod() +" - "+http.getRemoteAddr());
         return BaseResponseData.ok(
                 "저금 성공",
                 bankService.chargeMoney(request));

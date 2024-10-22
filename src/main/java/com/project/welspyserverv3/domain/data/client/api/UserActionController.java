@@ -25,7 +25,7 @@ public class UserActionController {
     @GetMapping
     @Operation(summary = "데이터 목록 조회")
     public BaseResponseData<List<DataResponse>> getAllUserActions(HttpServletRequest http) {
-        System.out.println(http.getRequestURI()+" - "+http.getRemoteAddr());
+        System.out.println(http.getRequestURI()+" "+ http.getMethod() +" - "+http.getRemoteAddr());
         return BaseResponseData.ok(
                 "조회 성공",
                 userActionService.getAllUserActions());
@@ -34,7 +34,7 @@ public class UserActionController {
     @GetMapping("/id")
     @Operation(summary = "챌린지 ID 전체 조회")
     public BaseResponseData<List<RoomIdResponse>> getAllRoomId (HttpServletRequest http){
-        System.out.println(http.getRequestURI()+" - "+http.getRemoteAddr());
+        System.out.println(http.getRequestURI()+" "+ http.getMethod() +" - "+http.getRemoteAddr());
         return BaseResponseData.ok(
                 "조회 성공",
                 userActionService.getAllRoomId());
