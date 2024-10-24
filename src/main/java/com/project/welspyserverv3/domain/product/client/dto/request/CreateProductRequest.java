@@ -1,17 +1,11 @@
 package com.project.welspyserverv3.domain.product.client.dto.request;
 
-import lombok.Getter;
-import lombok.Setter;
+public record CreateProductRequest (
+        String name,
+        String description,
+        Long price,
+        Long discount,
+        String imageUrl,
+        String productUrl
 
-@Getter
-@Setter
-public class CreateProductRequest {
-
-    private String name;
-    private String description;
-    private Long price;
-    private Long discount;
-    private String imageUrl;
-    private String productUrl;
-
-}
+){}

@@ -17,19 +17,19 @@ public class ProductService {
     private final Product productDto;
 
     public void createProduct(CreateProductRequest request) throws BadRequestException {
-        Long price = request.getPrice();
-        Long discountedPrice = price - (price * request.getDiscount() / 100);
+        Long price = request.price();
+        Long discountedPrice = price - (price * request.discount() / 100);
         if (discountedPrice < 0) {
             throw new BadRequestException("할인된 가격은 음수일 수 없습니다");
         }
         productJpaRepository.save(ProductEntity.builder()
-                .name(request.getName())
-                .description(request.getDescription())
-                .price(request.getPrice())
-                .discount(request.getDiscount())
+                .name(request.name())
+                .description(request.description())
+                .price(request.price())
+                .discount(request.discount())
                 .discountedPrice(discountedPrice)
-                .imageUrl(request.getImageUrl())
-                .productUrl(request.getProductUrl())
+                .imageUrl(request.imageUrl())
+                .productUrl(request.productUrl())
                 .build()
         );
     }
