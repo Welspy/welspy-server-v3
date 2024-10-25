@@ -13,10 +13,6 @@ public class BaseResponseData<T> extends BaseResponse {
         this.data = data;
     }
 
-    public static <T> BaseResponseData<T> of(HttpStatus status, String message, T data) {
-        return new BaseResponseData<>(status, message, data);
-    }
-
     public static <T> BaseResponseData<T> ok(String message, T data) {
         return new BaseResponseData<>(HttpStatus.OK, message, data);
     }
