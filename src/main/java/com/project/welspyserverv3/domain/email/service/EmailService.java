@@ -75,9 +75,9 @@ public class EmailService {
     public BaseResponse checkAuthNum(String email, String authNum) {
         ValueOperations<String, String> valOperations = redisConfig.redisTemplate().opsForValue();
         String code = valOperations.get(email);
-        if (Objects.equals(code, authNum)) {
-            return BaseResponse.ok("인증 성공");
-        } else return BaseResponse.of(HttpStatus.BAD_REQUEST,"인증 실패");
+        if (!Objects.equals(code, authNum)) {
+            return BaseResponse.of(HttpStatus.BAD_REQUEST,"인증 실패");
+        } else return BaseResponse.ok("인증 성공");
     }
 
 }
