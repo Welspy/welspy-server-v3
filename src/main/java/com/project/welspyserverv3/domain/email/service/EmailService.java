@@ -1,10 +1,12 @@
 package com.project.welspyserverv3.domain.email.service;
 
+import com.project.welspyserverv3.domain.email.exception.EmailErrorException;
 import com.project.welspyserverv3.global.common.dto.response.BaseResponse;
 import com.project.welspyserverv3.global.config.infra.redis.RedisConfig;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import lombok.RequiredArgsConstructor;
+import org.apache.coyote.BadRequestException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.http.HttpStatus;
@@ -50,7 +52,8 @@ public class EmailService {
             helper.setText(content,true); // content, html: true
             javaMailSender.send(message);
         } catch (MessagingException e) {
-            e.printStackTrace(); // 에러 출력
+            e.printStackTrace();
+            throw  EmailErrorException.EXCEPTION;
         }
         // redis에 3분 동안 이메일과 인증 코드 저장
         ValueOperations<String, String> valOperations = redisConfig.redisTemplate().opsForValue();
