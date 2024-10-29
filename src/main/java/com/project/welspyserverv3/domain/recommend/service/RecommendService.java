@@ -14,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
+import org.webjars.NotFoundException;
 
 @Service
 @RequiredArgsConstructor
@@ -46,7 +47,7 @@ public class RecommendService {
                 .toUri();
         ResponseEntity<RoomIdsResponse> responseEntity = restTemplate.getForEntity(uri, RoomIdsResponse.class);
         if (responseEntity.getBody() == null || responseEntity.getBody().getRoomIds() == null) {
-            throw new NullPointerException("응답값을 찾을 수 없습니다.");
+            throw new NotFoundException("응답값을 찾을 수 없습니다.");
         }
         List<Long> roomIds = responseEntity.getBody().getRoomIds();
         return roomIds;
