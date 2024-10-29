@@ -38,11 +38,9 @@ public class RecommendService {
         URI uri = UriComponentsBuilder
                 .fromUriString(url)
                 .path("/recommendations")
-                .queryParam(
-                        "user_email", userSecurity.getUser().getEmail(),
-                        "page", request.getPage(),
-                        "size", request.getSize()
-                )
+                .queryParam("user_email", userSecurity.getUser().getEmail())
+                .queryParam("page", request.getPage())
+                .queryParam("size", request.getSize())
                 .encode()
                 .build()
                 .toUri();
