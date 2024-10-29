@@ -6,15 +6,14 @@ import com.project.welspyserverv3.domain.room.domain.entity.RoomEntity;
 import com.project.welspyserverv3.domain.room.domain.repository.jpa.RoomJpaRepository;
 import com.project.welspyserverv3.global.common.dto.request.PageRequest;
 import com.project.welspyserverv3.global.common.repository.UserSecurity;
+import java.net.URI;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
-
-import java.net.URI;
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -57,7 +56,6 @@ public class RecommendService {
         }
 
         List<Long> roomIds = responseEntity.getBody().getRoomIds();
-        System.out.println(roomIds.toString());
         return roomIds;
     }
 
