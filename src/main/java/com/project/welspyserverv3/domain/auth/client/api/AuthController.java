@@ -10,7 +10,6 @@ import com.project.welspyserverv3.domain.auth.service.response.SignUpResponse;
 import com.project.welspyserverv3.global.common.dto.response.BaseResponseData;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
@@ -31,9 +30,7 @@ public class AuthController {
     @PostMapping("/sign-up")
     @Operation(summary = "회원가입")
     @ResponseStatus(HttpStatus.CREATED)
-    public BaseResponseData<SignUpResponse> signUp(@Validated @RequestBody SignUpRequest request,
-                                                   HttpServletRequest http){
-        System.out.println(http.getRequestURI()+" "+ http.getMethod() +" - "+http.getRemoteAddr());
+    public BaseResponseData<SignUpResponse> signUp(@Validated @RequestBody SignUpRequest request) {
         return BaseResponseData.created(
                 "회원가입 성공",
                 authService.signUp(request));
@@ -41,9 +38,7 @@ public class AuthController {
 
     @PostMapping("/sign-in")
     @Operation(summary = "로그인")
-    public BaseResponseData<JsonWebTokenResponse> signIn(@Validated @RequestBody SignInRequest request,
-                                                         HttpServletRequest http){
-        System.out.println(http.getRequestURI()+" "+ http.getMethod() +" - "+http.getRemoteAddr());
+    public BaseResponseData<JsonWebTokenResponse> signIn(@Validated @RequestBody SignInRequest request) {
         return BaseResponseData.ok(
                 "로그인 성공",
                 authService.signIn(request));
@@ -51,9 +46,7 @@ public class AuthController {
 
     @PostMapping("/refresh")
     @Operation(summary = "토큰 재발급")
-    public BaseResponseData<RefreshTokenResponse> refresh(RefreshTokenRequest request,
-                                                          HttpServletRequest http){
-        System.out.println(http.getRequestURI()+" "+ http.getMethod() +" - "+http.getRemoteAddr());
+    public BaseResponseData<RefreshTokenResponse> refresh(RefreshTokenRequest request) {
         return BaseResponseData.ok(
                 "재발급 성공",
                 authService.refresh(request.refreshToken()));

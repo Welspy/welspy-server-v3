@@ -6,7 +6,6 @@ import com.project.welspyserverv3.domain.email.service.EmailService;
 import com.project.welspyserverv3.global.common.dto.response.BaseResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,17 +22,15 @@ public class EmailController {
 
     @PostMapping("/send")
     @Operation(summary = "이메일 전송")
-    public BaseResponse sendEmail(@RequestBody EmailSendRequest request, HttpServletRequest http) {
-        System.out.println(http.getRequestURI()+" "+ http.getMethod() +" - "+http.getRemoteAddr());
+    public BaseResponse sendEmail(@RequestBody EmailSendRequest request) {
         emailService.joinEmail(request.email());
         return BaseResponse.ok("이메일 전송 성공");
     }
 
     @PostMapping("/check")
     @Operation(summary = "이메일 인증")
-    public BaseResponse checkEmail(@RequestBody EmailCheckRequest request, HttpServletRequest http) {
-        System.out.println(http.getRequestURI()+" "+ http.getMethod() +" - "+http.getRemoteAddr());
-        return emailService.checkAuthNum(request.email(),request.authNum());
+    public BaseResponse checkEmail(@RequestBody EmailCheckRequest request) {
+        return emailService.checkAuthNum(request.email(), request.authNum());
     }
 
 }

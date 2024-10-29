@@ -10,7 +10,7 @@ import com.project.welspyserverv3.global.common.dto.response.BaseResponse;
 import com.project.welspyserverv3.global.common.dto.response.BaseResponseData;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.servlet.http.HttpServletRequest;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.apache.coyote.BadRequestException;
 import org.springframework.http.HttpStatus;
@@ -22,8 +22,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/product")
@@ -37,18 +35,14 @@ public class ProductController {
     @PostMapping
     @Operation(summary = "제품 등록")
     @ResponseStatus(HttpStatus.CREATED)
-    public BaseResponse createProduct(@RequestBody CreateProductRequest request,
-                                      HttpServletRequest http) throws BadRequestException {
-        System.out.println(http.getRequestURI()+" "+ http.getMethod() +" - "+http.getRemoteAddr());
+    public BaseResponse createProduct(@RequestBody CreateProductRequest request) throws BadRequestException {
         productService.createProduct(request);
         return BaseResponse.created("등록 성공");
     }
 
     @GetMapping
     @Operation(summary = "제품 조회")
-    public BaseResponseData<Product> getProduct(@RequestParam Long idx,
-                                                HttpServletRequest http){
-        System.out.println(http.getRequestURI()+" "+ http.getMethod() +" - "+http.getRemoteAddr());
+    public BaseResponseData<Product> getProduct(@RequestParam Long idx) {
         return BaseResponseData.ok(
                 "조회 성공",
                 productService.getProduct(idx));
@@ -56,9 +50,7 @@ public class ProductController {
 
     @GetMapping("/list")
     @Operation(summary = "제품 목록")
-    public BaseResponseData<List<Product>> productList(@ModelAttribute PageRequest request,
-                                                       HttpServletRequest http) {
-        System.out.println(http.getRequestURI()+" "+ http.getMethod() +" - "+http.getRemoteAddr());
+    public BaseResponseData<List<Product>> productList(@ModelAttribute PageRequest request) {
         return BaseResponseData.ok(
                 "목록 출력 성공",
                 productQueryService.productList(request));
@@ -66,9 +58,7 @@ public class ProductController {
 
     @GetMapping("/search")
     @Operation(summary = "제품 검색")
-    public BaseResponseData<List<Product>> productListSearch(@ModelAttribute ProductSearchRequest request,
-                                                             HttpServletRequest http) {
-        System.out.println(http.getRequestURI()+" "+ http.getMethod() +" - "+http.getRemoteAddr());
+    public BaseResponseData<List<Product>> productListSearch(@ModelAttribute ProductSearchRequest request) {
         return BaseResponseData.ok(
                 "목록 출력 성공",
                 productQueryService.productSearch(request));
