@@ -77,7 +77,7 @@ public class RoomController {
     }
 
     @GetMapping("/private")
-    @Operation(summary = "비공개 챌리지 목록", description = "(불편해? 자세를 고쳐앉아~)")
+    @Operation(summary = "비공개 챌리지 목록")
     public BaseResponseData<List<Room>> privateRoomList(@ModelAttribute PageRequest request) {
         return BaseResponseData.ok(
                 "목록 출력 성공",
