@@ -46,13 +46,10 @@ public class RecommendService {
                 .encode()
                 .build()
                 .toUri();
-
         ResponseEntity<RoomIdsResponse> responseEntity = restTemplate.getForEntity(uri, RoomIdsResponse.class);
-
         if (responseEntity.getBody() == null || responseEntity.getBody().getRoomIds() == null) {
             throw new NullPointerException("응답값을 찾을 수 없습니다.");
         }
-
         List<Long> roomIds = responseEntity.getBody().getRoomIds();
         return roomIds;
     }
