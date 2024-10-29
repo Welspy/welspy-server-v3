@@ -47,10 +47,8 @@ public class RecommendService {
                 .build()
                 .toUri();
 
-        // 서버 응답을 RoomIdsResponse로 받음
         ResponseEntity<RoomIdsResponse> responseEntity = restTemplate.getForEntity(uri, RoomIdsResponse.class);
 
-        // 응답 확인 후 처리
         if (responseEntity.getBody() == null || responseEntity.getBody().getRoomIds() == null) {
             throw new NullPointerException("응답값을 찾을 수 없습니다.");
         }
