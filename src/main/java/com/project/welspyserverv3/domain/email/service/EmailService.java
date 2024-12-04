@@ -25,7 +25,7 @@ public class EmailService {
     private int authNumber;
 
     @Value("${spring.mail.username}")
-    private String serviceName;
+    private String userName;
 
     public void makeRandomNum() {
         Random r = new Random();
@@ -33,7 +33,6 @@ public class EmailService {
         for (int i = 0; i < 6; i++) {
             randomNumber += Integer.toString(r.nextInt(10));
         }
-
         authNumber = Integer.parseInt(randomNumber);
     }
 
@@ -64,7 +63,7 @@ public class EmailService {
                         "인증 번호는 " + authNumber + "입니다." +
                         "<br>" +
                         "회원 가입 폼에 해당 번호를 입력해주세요.";
-        mailSend(serviceName, customerMail, title, content);
+        mailSend(userName, customerMail, title, content);
         return Integer.toString(authNumber);
     }
 
