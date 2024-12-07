@@ -74,11 +74,11 @@ public class S3Service {
     }
 
     private String uploadImageToS3(MultipartFile image) throws IOException {
-        String originalFilename = image.getOriginalFilename(); //원본 파일 명
+        String originalFilename = image.getOriginalFilename();
         assert originalFilename != null : NullPointerException.class;
-        String extension = originalFilename.substring(originalFilename.lastIndexOf(".")); //확장자 명
+        String extension = originalFilename.substring(originalFilename.lastIndexOf("."));
 
-        String s3FileName = UUID.randomUUID().toString().substring(0, 10) + originalFilename; //변경된 파일 명
+        String s3FileName = UUID.randomUUID().toString().substring(0, 10) + originalFilename;
 
         InputStream is = image.getInputStream();
         byte[] bytes = IOUtils.toByteArray(is);
@@ -92,7 +92,7 @@ public class S3Service {
             PutObjectRequest putObjectRequest =
                     new PutObjectRequest(bucketName, s3FileName, byteArrayInputStream, metadata)
                             .withCannedAcl(CannedAccessControlList.PublicRead);
-            amazonS3.putObject(putObjectRequest); // put image to S3
+            amazonS3.putObject(putObjectRequest);
         }catch (Exception e){
             throw new AmazonS3Exception("S3 업로드 에러");
         }finally {
@@ -115,7 +115,7 @@ public class S3Service {
         try{
              URL url = new URL(imageAddress);
             String decodingKey = URLDecoder.decode(url.getPath(), "UTF-8");
-            return decodingKey.substring(1); // 맨 앞의 '/' 제거
+            return decodingKey.substring(1);
         }catch (MalformedURLException | UnsupportedEncodingException e){
             throw new AmazonS3Exception("이미지 삭제 에러");
         }
