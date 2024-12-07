@@ -27,15 +27,6 @@ public class EmailService {
     @Value("${spring.mail.username}")
     private String userName;
 
-    public void makeRandomNum() {
-        Random r = new Random();
-        String randomNumber = "";
-        for (int i = 0; i < 6; i++) {
-            randomNumber += Integer.toString(r.nextInt(10));
-        }
-        authNumber = Integer.parseInt(randomNumber);
-    }
-
     public void mailSend(String setFrom, String toMail, String title, String content) {
         MimeMessage message = javaMailSender.createMimeMessage();
         try {
@@ -53,9 +44,8 @@ public class EmailService {
         valOperations.set(toMail, Integer.toString(authNumber), 180, TimeUnit.SECONDS);
     }
 
-    public String joinEmail(String email) {
+    public void joinEmail(String email) {
         makeRandomNum();
-        String customerMail = email;
         String title = "회원 가입을 위한 이메일입니다!";
         String content =
                 "이메일을 인증하기 위한 절차입니다." +
@@ -63,8 +53,7 @@ public class EmailService {
                         "인증 번호는 " + authNumber + "입니다." +
                         "<br>" +
                         "회원 가입 폼에 해당 번호를 입력해주세요.";
-        mailSend(userName, customerMail, title, content);
-        return Integer.toString(authNumber);
+        mailSend(userName, email, title, content);
     }
 
     public BaseResponse checkAuthNum(String email, String authNum) {
@@ -75,6 +64,15 @@ public class EmailService {
         } else {
             return BaseResponse.ok("인증 성공");
         }
+    }
+
+    public void makeRandomNum() {
+        Random r = new Random();
+        String randomNumber = "";
+        for (int i = 0; i < 6; i++) {
+            randomNumber += Integer.toString(r.nextInt(10));
+        }
+        authNumber = Integer.parseInt(randomNumber);
     }
 
 }
