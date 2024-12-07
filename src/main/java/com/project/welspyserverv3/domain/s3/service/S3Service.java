@@ -51,7 +51,7 @@ public class S3Service {
     }
 
     private String uploadImage(MultipartFile image) {
-        this.validateImageFileExtention(image.getOriginalFilename());
+        this.validateImageFileExtension(image.getOriginalFilename());
         try {
             return this.uploadImageToS3(image);
         } catch (IOException e) {
@@ -59,23 +59,24 @@ public class S3Service {
         }
     }
 
-    private void validateImageFileExtention(String filename) {
+    private void validateImageFileExtension(String filename) {
         int lastDotIndex = filename.lastIndexOf(".");
         if (lastDotIndex == -1) {
             throw new AmazonS3Exception("확장자 에러");
         }
 
-        String extention = filename.substring(lastDotIndex + 1).toLowerCase();
+        String extension = filename.substring(lastDotIndex + 1).toLowerCase();
         List<String> allowedExtentionList = Arrays.asList("jpg", "jpeg", "png", "gif");
 
-        if (!allowedExtentionList.contains(extention)) {
+        if (!allowedExtentionList.contains(extension)) {
             throw new AmazonS3Exception("잘못된 이미지 확장자");
         }
     }
 
     private String uploadImageToS3(MultipartFile image) throws IOException {
         String originalFilename = image.getOriginalFilename(); //원본 파일 명
-        String extention = originalFilename.substring(originalFilename.lastIndexOf(".")); //확장자 명
+        assert originalFilename != null : NullPointerException.class;
+        String extension = originalFilename.substring(originalFilename.lastIndexOf(".")); //확장자 명
 
         String s3FileName = UUID.randomUUID().toString().substring(0, 10) + originalFilename; //변경된 파일 명
 
@@ -83,7 +84,7 @@ public class S3Service {
         byte[] bytes = IOUtils.toByteArray(is);
 
         ObjectMetadata metadata = new ObjectMetadata();
-        metadata.setContentType("image/" + extention);
+        metadata.setContentType("image/" + extension);
         metadata.setContentLength(bytes.length);
         ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(bytes);
 
@@ -98,7 +99,6 @@ public class S3Service {
             byteArrayInputStream.close();
             is.close();
         }
-
         return amazonS3.getUrl(bucketName, s3FileName).toString();
     }
 
