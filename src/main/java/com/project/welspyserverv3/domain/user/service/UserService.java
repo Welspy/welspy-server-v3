@@ -1,11 +1,13 @@
 package com.project.welspyserverv3.domain.user.service;
 
+import com.project.welspyserverv3.domain.room.domain.entity.MemberListEntity;
 import com.project.welspyserverv3.domain.room.domain.repository.jpa.MemberListJpaRepository;
 import com.project.welspyserverv3.domain.user.client.dto.User;
 import com.project.welspyserverv3.domain.user.domain.entity.UserEntity;
 import com.project.welspyserverv3.domain.user.domain.repository.jpa.UserJpaRepository;
 import com.project.welspyserverv3.domain.user.exception.UserNotFoundException;
 import com.project.welspyserverv3.global.common.repository.UserSecurity;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -35,7 +37,9 @@ public class UserService {
     public void userDelete(){
         User user = getUser();
         userJpaRepository.deleteByEmail(user.getEmail());
-        memberListJpaRepository.deleteByEmail(user.getEmail());
+        List<MemberListEntity> memberList = memberListJpaRepository
+                .findAllByEmail(userSecurity.getUser().getEmail());
+
     }
 
     public void editUser(User requestUser) {

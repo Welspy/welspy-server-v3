@@ -14,6 +14,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
@@ -114,9 +115,9 @@ public class S3Service {
     private String getKeyFromImageAddress(String imageAddress){
         try{
              URL url = new URL(imageAddress);
-            String decodingKey = URLDecoder.decode(url.getPath(), "UTF-8");
+            String decodingKey = URLDecoder.decode(url.getPath(), StandardCharsets.UTF_8);
             return decodingKey.substring(1);
-        }catch (MalformedURLException | UnsupportedEncodingException e){
+        }catch (MalformedURLException e){
             throw new AmazonS3Exception("이미지 삭제 에러");
         }
     }

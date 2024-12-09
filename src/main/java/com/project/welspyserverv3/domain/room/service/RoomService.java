@@ -25,7 +25,7 @@ public class RoomService {
     private final Room roomDto;
 
     public void createRoom(RoomCreateRequest request) {
-        roomJpaRepository.save(RoomEntity.builder()
+        saveRoom(Room.builder()
                 .title(request.getTitle())
                 .description(request.getDescription())
                 .goalMoney(request.getGoalMoney())
@@ -35,8 +35,7 @@ public class RoomService {
                 .category(request.getCategory())
                 .roomType(request.getRoomType())
                 .productId(request.getProductId())
-                .build()
-        );
+                .build());
     }
 
     public void joinRoom(RoomJoinRequest request) {
