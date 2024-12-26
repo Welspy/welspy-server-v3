@@ -52,7 +52,7 @@ public class S3Service {
     }
 
     private String uploadImage(MultipartFile image) {
-        this.validateImageFileExtension(image.getOriginalFilename());
+        this.validateImageFileExtension(Objects.requireNonNull(image.getOriginalFilename()));
         try {
             return this.uploadImageToS3(image);
         } catch (IOException e) {
